@@ -9,9 +9,7 @@ class PCA:
         self.mean = None
         self.components = None
 
-    def fit(self, X: np.ndarray) -> None:
-        #TODO: 10%
-        
+    def fit(self, X: np.ndarray) -> None:        
         X_norm = self.normalize(X)
         cov_matrix = np.cov(X_norm.T)
         eigen_values, eigen_vectors = np.linalg.eigh(cov_matrix)
