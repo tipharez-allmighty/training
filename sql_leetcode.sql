@@ -128,3 +128,32 @@ FROM (
     AND s.purchase_date BETWEEN p.start_date AND p.end_date
     GROUP BY p.product_id
 ) AS subquery;
+
+/*
+1075. Project Employees I
+*/
+SELECT p.project_id, ROUND(AVG(e.experience_years), 2) AS average_years
+    FROM Project AS p
+LEFT OUTER JOIN Employee AS e
+    ON p.employee_id = e.employee_id
+    GROUP BY p.project_id;
+/*
+1633. Percentage of Users Attended a Contest
+*/
+SELECT r.contest_id,
+    ROUND(COUNT(DISTINCT r.user_id)/(SELECT COUNT(u.user_id) FROM Users As u)*100,2) AS percentage
+    FROM Register AS r
+    GROUP BY r.contest_id
+    ORDER BY percentage DESC, r.contest_id ASC;
+
+/*
+1211. Queries Quality and Percentage
+*/
+
+SELECT 
+    query_name,
+    ROUND(SUM(rating / position) / NULLIF(COUNT(DISTINCT result), 0), 2) AS quality,
+    ROUND(100.0 * SUM(CASE WHEN rating < 3 THEN 1 ELSE 0 END) / NULLIF(COUNT(DISTINCT result), 0), 2) AS poor_query_percentage
+FROM Queries
+WHERE query_name IS NOT NULL
+GROUP BY query_name;
