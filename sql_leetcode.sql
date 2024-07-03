@@ -190,10 +190,60 @@ GROUP BY user_id;
 /*
 619. Biggest Single Number
 */
-
 SELECT MAX(num) as num
 FROM (SELECT num
      FROM MyNumbers
      GROUP BY num
      HAVING COUNT(num) = 1)
      AS unique_nums;
+
+/*
+1731. The Number of Employees Which Report to Each Employee
+*/
+SELECT e1.employee_id, e1.name, COUNT(e2.employee_id) AS reports_count, ROUND(AVG(e2.age), 0) AS average_age
+FROM Employees AS e1
+JOIN Employees AS e2 ON
+    e1.employee_id = e2.reports_to
+GROUP BY e1.employee_id
+ORDER BY e1.employee_id ASC;
+
+/*
+1789. Primary Department for Each Employee
+*/
+SELECT employee_id,department_id
+FROM Employee
+GROUP BY employee_id, primary_flag
+HAVING primary_flag = 'Y' OR employee_id in (SELECT employee_id
+    FROM Employee
+    Group by employee_id
+    having count(employee_id)=1)
+
+/*
+610. Triangle Judgement
+*/
+SELECT x, y, z, 
+    (CASE WHEN x + y > z and x + z > y and y + z > x THEN 'Yes' ELSE 'No' END) AS triangle
+FROM Triangle;
+
+/*
+1978. Employees Whose Manager Left the Company
+*/
+SELECT employee_id
+FROM Employees
+WHERE salary < 30000 AND manager_id NOT IN (SELECT employee_id FROM Employees)
+ORDER BY employee_id ASC;
+
+/*
+1667. Fix Names in a Table
+*/
+
+SELECT user_id, CONCAT(UPPER(SUBSTRING(name, 1, 1)), LOWER(SUBSTRING(name, 2))) AS name
+FROM Users
+ORDER BY user_id ASC;
+
+/*
+1667. Fix Names in a Table
+*/
+SELECT patient_id, patient_name, conditions
+FROM Patients
+WHERE conditions REGEXP '(^| )DIAB1';
