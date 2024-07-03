@@ -133,23 +133,22 @@ FROM (
 1075. Project Employees I
 */
 SELECT p.project_id, ROUND(AVG(e.experience_years), 2) AS average_years
-    FROM Project AS p
+FROM Project AS p
 LEFT OUTER JOIN Employee AS e
     ON p.employee_id = e.employee_id
-    GROUP BY p.project_id;
+GROUP BY p.project_id;
 /*
 1633. Percentage of Users Attended a Contest
 */
 SELECT r.contest_id,
     ROUND(COUNT(DISTINCT r.user_id)/(SELECT COUNT(u.user_id) FROM Users As u)*100,2) AS percentage
-    FROM Register AS r
-    GROUP BY r.contest_id
-    ORDER BY percentage DESC, r.contest_id ASC;
+FROM Register AS r
+GROUP BY r.contest_id
+ORDER BY percentage DESC, r.contest_id ASC;
 
 /*
 1211. Queries Quality and Percentage
 */
-
 SELECT 
     query_name,
     ROUND(SUM(rating / position) / NULLIF(COUNT(DISTINCT result), 0), 2) AS quality,
@@ -157,3 +156,44 @@ SELECT
 FROM Queries
 WHERE query_name IS NOT NULL
 GROUP BY query_name;
+
+/*
+2356. Number of Unique Subjects Taught by Each Teacher
+*/
+SELECT teacher_id, COUNT(DISTINCT subject_id) AS cnt
+FROM Teacher
+GROUP BY teacher_id;
+
+/*
+1141. User Activity for the Past 30 Days I
+*/
+SELECT activity_date AS day, COUNT(DISTINCT user_id) AS active_users
+FROM Activity
+WHERE activity_date BETWEEN '2019-06-28' AND '2019-07-27'
+GROUP BY activity_date;
+
+/*
+596. Classes More Than 5 Students
+*/
+SELECT Class
+FROM Courses
+GROUP BY Class
+HAVING COUNT(student) >= 5;
+
+/*
+1729. Find Followers Count
+*/
+SELECT user_id, COUNT(DISTINCT follower_id) AS followers_count
+FROM Followers
+GROUP BY user_id;
+
+/*
+619. Biggest Single Number
+*/
+
+SELECT MAX(num) as num
+FROM (SELECT num
+     FROM MyNumbers
+     GROUP BY num
+     HAVING COUNT(num) = 1)
+     AS unique_nums;
