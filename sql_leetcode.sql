@@ -263,3 +263,22 @@ SELECT sell_date,
        GROUP_CONCAT(DISTINCT product ORDER BY product SEPARATOR ',') AS products
 FROM Activities
 GROUP BY sell_date;
+
+
+/*
+1327. List the Products Ordered in a Period
+*/
+SELECT p.product_name, SUM(o.unit) AS unit
+FROM Orders as o
+LEFT JOIN Products AS p ON o.product_id = p.product_id
+WHERE o.order_date < '2020-03-1' AND o.order_date >= '2020-02-1'
+GROUP BY o.product_id
+HAVING unit >= 100;
+
+
+/*
+517. Find Users With Valid E-Mails
+*/
+SELECT *
+FROM Users
+WHERE mail REGEXP '^[A-Za-z][A-Za-z0-9_.-]*@leetcode[.]com$';
