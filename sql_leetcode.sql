@@ -242,8 +242,24 @@ FROM Users
 ORDER BY user_id ASC;
 
 /*
-1667. Fix Names in a Table
+1527. Patients With a Condition
 */
 SELECT patient_id, patient_name, conditions
 FROM Patients
 WHERE conditions REGEXP '(^| )DIAB1';
+
+/*
+196. Delete Duplicate Emails
+*/
+DELETE p1
+FROM Person AS p1, Person as p2
+WHERE p1.email = p2.email AND p1.id > p2.id;
+
+/*
+1484. Group Sold Products By The Date
+*/
+SELECT sell_date, 
+       COUNT(DISTINCT product) AS num_sold,
+       GROUP_CONCAT(DISTINCT product ORDER BY product SEPARATOR ',') AS products
+FROM Activities
+GROUP BY sell_date;
