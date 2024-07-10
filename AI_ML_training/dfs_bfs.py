@@ -1,7 +1,9 @@
-import queue
-import networkx as nx
-import matplotlib.pyplot as plt
 import time
+import queue
+
+import matplotlib.pyplot as plt
+import networkx as nx
+
 
 def order_dfs(graph, start_node):
     visited = set()
