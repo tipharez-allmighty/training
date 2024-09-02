@@ -16,3 +16,20 @@ var search = function(nums, target) {
     }
     return -1
 };
+
+// search insert
+var searchInsert = function(nums, target) {
+    low = 0;
+    high = nums.length - 1;
+
+    while (high >= low) {
+        mid = low + Math.floor((high - low)/2);
+        if (nums[mid] < target) {
+            low = mid + 1;
+        }
+        else {
+            high = mid - 1;
+        }
+    }
+    return low;
+};
