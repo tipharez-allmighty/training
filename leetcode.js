@@ -33,3 +33,33 @@ var searchInsert = function(nums, target) {
     }
     return low;
 };
+
+//Search in Rotated Sorted Array
+var search = function(nums, target) {
+    low = 0;
+    high = nums.length - 1;
+
+    while (low <= high) {
+        mid = low + Math.floor((high - low) / 2);
+
+        if (nums[mid] == target) {
+            return mid;
+        }
+        
+        if (nums[low] <= nums[mid]) { 
+            if (target < nums[low] || target > nums[mid]) {
+                low = mid + 1;
+            } else {
+                high = mid - 1;
+            }
+        } else {  
+            if (target < nums[mid] || target > nums[high]) {
+                high = mid - 1;
+            } else {
+                low = mid + 1;
+            }
+        }
+    }
+
+    return -1;  
+};
