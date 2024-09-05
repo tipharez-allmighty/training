@@ -34,7 +34,7 @@ var searchInsert = function(nums, target) {
     return low;
 };
 
-//Search in Rotated Sorted Array
+// Search in Rotated Sorted Array
 var search = function(nums, target) {
     low = 0;
     high = nums.length - 1;
@@ -63,3 +63,16 @@ var search = function(nums, target) {
 
     return -1;  
 };
+
+// bubble sore
+
+var bubble_sort = function(nums) {
+    size = nums.length;
+    for (i = 0; i < size - 1; i++) {
+        for (j = 0; j < size - 1 - i; j++) {
+            if (nums[j] > nums[j + 1]) {
+                [nums[j], nums[j + 1]] = [nums[j + 1], nums[j]];
+            }
+        }
+    }
+}
