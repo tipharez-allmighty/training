@@ -27,7 +27,7 @@ class Solution:
                 high = mid - 1
         return low
 
-#Search in Rotated Sorted Array
+# Search in Rotated Sorted Array
 class Solution:
     def search(self, nums: List[int], target: int) -> int:
         low = 0
@@ -50,3 +50,12 @@ class Solution:
                     low = mid + 1
 
         return -1
+
+# bubble sort
+def bubbleSort(arr):
+    size = len(arr)
+    
+    for i in range(size - 1):
+        for j in range(size - 1 - i):
+            if arr[j] > arr[j + 1]:
+                arr[j], arr[j + 1] = arr[j + 1], arr[j]
