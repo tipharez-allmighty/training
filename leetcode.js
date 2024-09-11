@@ -88,3 +88,46 @@ var insert_sort = function(nums) {
         }
     }
 }
+
+// merge_sort
+var merge_inner = function(arr1, arr2) {
+    let temp_arr = []
+
+    while (arr1.length != 0 && arr2.length != 0) {
+        if (arr1[0] > arr2[0]) {
+            temp_arr.push(arr2[0]);
+            arr2.splice(0,1);
+        }
+
+        else {
+            temp_arr.push(arr1[0]);
+            arr1.splice(0,1);  
+        }
+    }
+        while (arr1.length != 0) {
+            temp_arr.push(arr1[0]);
+            arr1.splice(0,1);
+        }
+
+        while (arr2.length != 0) {
+            temp_arr.push(arr2[0]);
+            arr2.splice(0,1);
+        }        
+    
+        return temp_arr;
+}
+
+var merge_sort = function(arr) {
+    let middle = arr.length / 2;
+    let arr1 = arr.slice(0, middle);
+    let arr2 = arr.slice(middle);
+
+    if (arr.length == 1) {
+        return arr;
+    }
+
+    arr1 = merge_sort(arr1);
+    arr2 = merge_sort(arr2);
+    
+    return merge_inner(arr1, arr2);
+}
