@@ -67,3 +67,37 @@ def insertSort(arr):
         while arr[j - 1] > arr[j] and j > 0:
             arr[j], arr[j - 1] = arr[j - 1], arr[j]
             j = j - 1
+
+# merge_sort
+def merge_sort(arr):
+    middle = len(arr)// 2
+    arr1 = arr[:middle]
+    arr2 = arr[middle:]
+    
+    def merge_inner(arr1, arr2):
+        temp_arr = []
+        while len(arr1) != 0 and len(arr2) != 0:
+            if arr1[0] > arr2[0]:
+                temp_arr.append(arr2[0])
+                arr2.remove(arr2[0])
+            else:
+                temp_arr.append(arr1[0])
+                arr1.remove(arr1[0])
+        
+        while len(arr1) != 0:
+                temp_arr.append(arr1[0])
+                arr1.remove(arr1[0])  
+        
+        while len(arr2) != 0:
+                temp_arr.append(arr2[0])
+                arr2.remove(arr2[0])
+        
+        return temp_arr               
+    
+    if len(arr) == 1:
+        return arr
+    
+    arr1 = merge_sort(arr1)
+    arr2 = merge_sort(arr2)
+    
+    return merge_inner(arr1, arr2)
