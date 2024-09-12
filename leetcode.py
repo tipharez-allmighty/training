@@ -68,6 +68,23 @@ def insertSort(arr):
             arr[j], arr[j - 1] = arr[j - 1], arr[j]
             j = j - 1
 
+# recursive insert sort
+def insertSortRec(arr, n=None):
+    if n is None:
+        n = len(arr)
+    if n <= 1:
+        return arr
+    insertSortRec(arr, n - 1)
+    
+    last = arr[n-1]
+    j = n-2
+    
+    while arr[j] > last and j >= 0:
+        arr[j+1] = arr[j]
+        j = j - 1
+    
+    arr[j+1] = last
+
 # merge_sort
 def merge_sort(arr):
     middle = len(arr)// 2
