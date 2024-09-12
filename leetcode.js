@@ -89,6 +89,26 @@ var insert_sort = function(nums) {
     }
 }
 
+// recursive insert sort
+var insert_sort_rec = function(nums, n=null) {
+    if (n === null) {
+        n = nums.length;
+    }
+
+    if (n <= 1) {
+        return nums;
+    }
+    insert_sort_rec(nums, n-1);
+    last = nums[n-1];
+    j = n - 2;
+
+    while (nums[j] > last && j >= 0) {
+        nums[j+1] = nums[j];
+        j = j - 1;
+    }
+    nums[j+1] = last;
+}
+
 // merge_sort
 var merge_inner = function(arr1, arr2) {
     let temp_arr = []
