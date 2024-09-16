@@ -118,3 +118,10 @@ def merge_sort(arr):
     arr2 = merge_sort(arr2)
     
     return merge_inner(arr1, arr2)
+
+#brute_force matrix miltiplication
+def brute_force(A,B,C,n):
+    for i in range(n):
+        for j in range(n):
+            for k in range(n):
+                C[i][j] += A[i][k]*B[k][j]
