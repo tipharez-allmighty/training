@@ -119,9 +119,36 @@ def merge_sort(arr):
     
     return merge_inner(arr1, arr2)
 
-#brute_force matrix miltiplication
-def brute_force(A,B,C,n):
-    for i in range(n):
-        for j in range(n):
-            for k in range(n):
+#strassens matrix miltiplication
+def brute_force(A,B):
+    C = np.zeros_like(A)
+    for i in range(A.shape[0]):
+        for j in range(B.shape[1]):
+            for k in range(A.shape[1]):
                 C[i][j] += A[i][k]*B[k][j]
+    return C
+
+
+def split_matrix(matrix):
+    n = len(matrix)
+    return matrix[:n//2, :n//2], matrix[:n//2,n//2:], matrix[n//2:,:n//2], matrix[n//2:,n//2:]
+
+def strassens(A,B):
+    if len(A) <= 2:
+        return brute_force(A,B)
+    a,b,c,d = split_matrix(A)
+    e,f,g,h = split_matrix(B)
+    M1 = strassens(a + d, e + h)
+    M2 = strassens(c + d, e)
+    M3 = strassens(a, f - h)
+    M4 = strassens(d, g - e)
+    M5 = strassens(a + b, h)
+    M6 = strassens(c - a, e + f)
+    M7 = strassens(b - d, g + h)
+    
+    C11 = M1 + M4 - M5 + M7
+    C12 = M3 + M5
+    C21 = M2 + M4
+    C22 = M1 - M2 + M3 + M6
+    
+    return np.vstack((np.hstack((C11,C12)), np.hstack((C21,C22))))
