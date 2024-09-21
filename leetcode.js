@@ -151,3 +151,40 @@ var merge_sort = function(arr) {
     
     return merge_inner(arr1, arr2);
 }
+
+// heapsort
+var swap = function(arr, i, j) {
+    [arr[i], arr[j]] = [arr[j], arr[i]]
+};
+
+var build_heap = function(arr, n, i) {
+    let largest = i;
+    let left = 2*i + 1;
+    let right = 2*i + 2;
+    
+    if (left < n && arr[left] > arr[largest]) {
+        largest = left;
+    };
+
+    if (right < n && arr[right] > arr[largest]) {
+        largest = right;
+    };
+
+    if (largest != i) {
+        swap(arr, i, largest);
+        build_heap(arr, n, largest);
+    };
+};
+
+var heapsort = function(arr) {
+    let n = arr.length;
+    for (let i = Math.floor(n/2) - 1; i >= 0; i--) {
+        build_heap(arr, n, i);
+    };
+
+    for (let i = n - 1; i > 0; i--) {
+        swap(arr, i, 0);
+        build_heap(arr, i, 0);
+    };
+};
+
