@@ -118,6 +118,7 @@ def merge_sort(arr):
     arr2 = merge_sort(arr2)
     
     return merge_inner(arr1, arr2)
+
 # heap sort
 def swap(i,j,arr):
     arr[i],arr[j] = arr[j],arr[i]
@@ -141,10 +142,17 @@ def heapify(arr,n):
         buildHeap(arr, n, k)
 
 def heapsort(arr):
+    n = len(arr)
+    heapify(arr, n)
+    for i in range(n - 1, 0, -1):
+        swap(0, i, arr)
+        buildHeap(arr, i, 0)
+"""        
+def heapsort(arr):
     for n in range(len(arr), 0, -1):
         heapify(arr, n)
         swap(0, n - 1, arr)
-        
+"""        
 # strassens matrix miltiplication
 def brute_force(A,B):
     C = np.zeros_like(A)
