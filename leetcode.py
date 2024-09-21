@@ -118,8 +118,34 @@ def merge_sort(arr):
     arr2 = merge_sort(arr2)
     
     return merge_inner(arr1, arr2)
+# heap sort
+def swap(i,j,arr):
+    arr[i],arr[j] = arr[j],arr[i]
 
-#strassens matrix miltiplication
+def buildHeap(arr, n, i):
+    parent = i
+    left = 2*i + 1
+    right = 2*i + 2
+    
+    if left < n and arr[parent] < arr[left]:
+        parent = left
+    if right < n and arr[parent] < arr[right]:
+        parent = right
+    if parent != i:
+        swap(i, parent, arr)
+        buildHeap(arr, n, parent)
+
+def heapify(arr,n):
+    i = n//2 - 1   
+    for k in range(i,-1,-1):
+        buildHeap(arr, n, k)
+
+def heapsort(arr):
+    for n in range(len(arr), 0, -1):
+        heapify(arr, n)
+        swap(0, n - 1, arr)
+        
+# strassens matrix miltiplication
 def brute_force(A,B):
     C = np.zeros_like(A)
     for i in range(A.shape[0]):
