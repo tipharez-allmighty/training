@@ -1,4 +1,4 @@
-rom dataclasses import dataclass, field
+from dataclasses import dataclass, field
 
 @dataclass
 class Heap:
@@ -20,7 +20,7 @@ class Heap:
             self._swap(i, parent)
             self._buildHeap(n, parent)
 
-    def heapify(self, n=None):
+    def heapify(self, n=None): # O(n)
         if n is None:
             n = len(self.arr)
         i = n//2 - 1   
@@ -85,7 +85,7 @@ class Heap:
             else:
                 break    
              
-    def heapSort(self):
+    def heapSort(self): # O(nlogn)
         n = len(self.arr)
         self.heapify(n)
         
