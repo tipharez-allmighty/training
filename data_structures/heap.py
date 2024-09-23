@@ -36,7 +36,7 @@ class Heap:
     
     def heapExtractMax(self):
         self._swap(0, len(self.arr) - 1)
-        max_value = self.arr.pop(len(self.arr) - 1)
+        max_value = self.arr.pop()
         self._bubbleDown()
         return max_value
 
@@ -64,19 +64,18 @@ class Heap:
             node = parent
             parent = (node - 1) // 2
     
+    
     def _bubbleDown(self, node=None): # O(logn)
         n = len(self.arr)
         if node is None:
             node = 0
-        left = 2*node + 1
-        right = 2*node + 2
         while True:
             left = 2*node + 1
             right = 2*node + 2
             largest = node
             if left < n and self.arr[node] < self.arr[left]:
                 largest = left
-            if right < n and self.arr[node] < self.arr[right]:
+            if right < n and self.arr[largest] < self.arr[right]:
                 largest = right
             
             if largest != node:
