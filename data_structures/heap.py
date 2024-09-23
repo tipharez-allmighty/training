@@ -73,7 +73,7 @@ class Heap:
             left = 2*node + 1
             right = 2*node + 2
             largest = node
-            if left < n and self.arr[node] < self.arr[left]:
+            if left < n and self.arr[largest] < self.arr[left]:
                 largest = left
             if right < n and self.arr[largest] < self.arr[right]:
                 largest = right
