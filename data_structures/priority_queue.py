@@ -27,15 +27,3 @@ class PriorityQueue:
     
     def is_empty(self):
         return len(self.heap.arr) == 0
-        
-       
-arr = [3, 1, 4, 1, 5, 9, 2, 6, 4,34,7,68,145,]
-
-pq = PriorityQueue(arr)
-print(pq)
-pq.enque(9)
-pq.change_priority(5,105)
-pq.change_priority(2,103)
-print(pq, sep='\n')
-pq.deque()
-print(pq, pq.get_max(), pq.is_empty(), sep='\n')
