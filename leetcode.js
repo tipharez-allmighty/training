@@ -188,3 +188,28 @@ var heapsort = function(arr) {
     };
 };
 
+// quicksort
+var partition = function(arr, current_index, pivot) {
+    let swap_marker = current_index - 1;
+    for (let i = current_index; i < pivot; i++) {
+        if (arr[i] <= arr[pivot]) {
+            swap_marker++;
+            if (i > swap_marker) {
+                [arr[i], arr[swap_marker]] = [arr[swap_marker], arr[i]];
+            }
+        }
+    }
+    [arr[swap_marker + 1], arr[pivot]] = [arr[pivot], arr[swap_marker + 1]];
+    return swap_marker + 1;
+}
+
+var quicksort = function(arr, left=0, right=null) {
+    if (right === null) {
+        right = arr.length - 1;
+    }
+    if (left < right) {
+        let pivot = partition(arr, left, right);
+        quicksort(arr, left, pivot - 1);
+        quicksort(arr, pivot + 1, right);
+    }
+}
