@@ -152,7 +152,29 @@ def heapsort(arr):
     for n in range(len(arr), 0, -1):
         heapify(arr, n)
         swap(0, n - 1, arr)
-"""        
+"""
+# quicksort
+def partition(arr, current_index, pivot):
+    swap_marker = current_index - 1
+    while current_index <= pivot:
+        if arr[current_index] > arr[pivot]:
+            current_index +=1
+            continue
+        if arr[current_index] <= arr[pivot]:
+            swap_marker+=1
+            if current_index > swap_marker:
+                arr[current_index], arr[swap_marker] = arr[swap_marker], arr[current_index]
+            current_index +=1
+    return swap_marker
+
+def quicksort(arr, left=0, right=None):
+    if right is None:
+        right = len(arr) - 1
+    if left < right:
+        pivot = partition(arr, left, right)
+        quicksort(arr, left, pivot - 1)
+        quicksort(arr, pivot + 1, right)
+        
 # strassens matrix miltiplication
 def brute_force(A,B):
     C = np.zeros_like(A)
