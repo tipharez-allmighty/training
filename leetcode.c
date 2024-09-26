@@ -140,3 +140,36 @@ void heapsort(int arr[], int size) {
         build_heap(arr, i, 0);
     };
 };
+
+// quicksort
+void swap(int arr[], int i, int j);
+
+void swap(int arr[], int i, int j) {
+    int temp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = temp;
+};
+
+int partition(int arr[], int current_index, int pivot);
+
+int partition(int arr[], int current_index, int pivot) {
+    int swap_marker = current_index - 1;
+    for (int i = current_index; i < pivot; i++) {
+        if (arr[i] <= arr[pivot]) {
+            swap_marker++;
+            if (i > swap_marker) {
+                swap(arr, i, swap_marker);
+            }
+        }
+    }
+    swap(arr, swap_marker + 1, pivot);
+    return swap_marker + 1;
+};
+
+void quicksort(int arr[], int left, int right) {
+    if (left < right) {
+        int pivot = partition(arr, left, right);
+        quicksort(arr, left, pivot - 1);
+        quicksort(arr, pivot + 1, right);
+    }
+};
