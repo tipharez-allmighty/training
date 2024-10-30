@@ -17,6 +17,33 @@ var search = function(nums, target) {
     return -1
 };
 
+// valid palindrome
+ function isAlphanumeric(char) {
+    return /^[a-z0-9]+$/i.test(char);
+}
+
+var isPalindrome = function(s) {
+    var left = 0;
+    var right = s.length - 1;
+
+    while (left < right) {
+        if (!isAlphanumeric(s[left])) {
+            left += 1;
+        } 
+        else if (!isAlphanumeric(s[right])) {
+            right -= 1;
+        } 
+        else if (s[left].toLowerCase() === s[right].toLowerCase()) {
+            left += 1;
+            right -= 1;
+        } 
+        else {
+            return false;
+        }
+    }
+    return true;
+};
+
 // search insert
 var searchInsert = function(nums, target) {
     low = 0;
