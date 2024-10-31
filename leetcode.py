@@ -190,6 +190,43 @@ def quicksort(arr, left=0, right=None):
         pivot = partition(arr, left, right)
         quicksort(arr, left, pivot - 1)
         quicksort(arr, pivot + 1, right)
+
+# maximum Depth of Binary Tree
+class Solution(object):
+    def maxDepth(self, root):
+        """
+        :type root: Optional[TreeNode]
+        :rtype: int
+        """
+        stack = [[root, 1]]
+        res = 0
+
+        while stack:
+            node, depth = stack.pop()            
+            if node:
+                if res < depth:
+                    res = depth
+                stack.append([node.left, depth + 1])
+                stack.append([node.right, depth + 1])
+        return res
+
+class Solution(object):
+    def maxDepth(self, root):
+        """
+        :type root: Optional[TreeNode]
+        :rtype: int
+        """
+        stack = [[root, 0]]
+        res = 0
+
+        while stack:
+            node, depth = stack.pop()
+            if res < depth:
+                res = depth           
+            if node:
+                stack.append([node.left, depth + 1])
+                stack.append([node.right, depth + 1])
+        return res
         
 # strassens matrix miltiplication
 def brute_force(A,B):
