@@ -227,6 +227,18 @@ class Solution(object):
                 stack.append([node.left, depth + 1])
                 stack.append([node.right, depth + 1])
         return res
+
+# recursive maximum Depth of Binary Tree
+class Solution(object):
+    def maxDepth(self, root):
+        """
+        :type root: Optional[TreeNode]
+        :rtype: int
+        """
+        if not root:
+            return 0
+        
+        return 1 + max(self.maxDepth(root.left), self.maxDepth(root.right))
         
 # strassens matrix miltiplication
 def brute_force(A,B):
