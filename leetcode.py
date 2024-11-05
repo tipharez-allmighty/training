@@ -1,11 +1,12 @@
 # binary search
 class Solution:
+    # Time Complexity: O(log n) because we split the search space in half each iteration.
     def search(self, nums: List[int], target: int) -> int:
         low = 0
         high = len(nums) - 1
-        
+
         while high >= low:
-            mid = low + (high - low)//2
+            mid = low + (high - low) // 2
             if nums[mid] == target:
                 return mid
             if target > nums[mid]:
@@ -16,27 +17,30 @@ class Solution:
 
 # Valid Palindrome
 class Solution:
+    # Time Complexity: O(n), where n is the length of the string. We scan each character once from both ends.
     def isPalindrome(self, s: str) -> bool:
         left, right = 0, len(s) - 1
 
         while left < right:
             if not s[left].isalnum():
-                left+=1
+                left += 1
             elif not s[right].isalnum():
-                right-=1
+                right -= 1
             elif s[left].lower() == s[right].lower():
-                left+=1
-                right-=1
-            else: return False
+                left += 1
+                right -= 1
+            else:
+                return False
         return True
-        
+
 # search insert
 class Solution:
+    # Time Complexity: O(log n) due to binary search approach.
     def searchInsert(self, nums: List[int], target: int) -> int:
         low = 0
         high = len(nums) - 1
         while high >= low:
-            mid = low + (high - low)//2
+            mid = low + (high - low) // 2
             if nums[mid] < target:
                 low = mid + 1
             else:
@@ -45,6 +49,7 @@ class Solution:
 
 # Search in Rotated Sorted Array
 class Solution:
+    # Time Complexity: O(log n) because we use a modified binary search to handle rotation.
     def search(self, nums: List[int], target: int) -> int:
         low = 0
         high = len(nums) - 1
@@ -68,15 +73,17 @@ class Solution:
         return -1
 
 # bubble sort
+# Time Complexity: O(n^2) due to nested loops.
 def bubbleSort(arr):
     size = len(arr)
-    
+
     for i in range(size - 1):
         for j in range(size - 1 - i):
             if arr[j] > arr[j + 1]:
                 arr[j], arr[j + 1] = arr[j + 1], arr[j]
 
 # insert sort
+# Time Complexity: O(n^2) for the worst case, where elements are in reverse order.
 def insertSort(arr):
     for i in range(len(arr)):
         j = i
@@ -85,29 +92,32 @@ def insertSort(arr):
             j = j - 1
 
 # recursive insert sort
+# Time Complexity: O(n^2) due to recursive calls and element comparisons/swaps.
 def insertSortRec(arr, n=None):
     if n is None:
         n = len(arr)
     if n <= 1:
         return arr
     insertSortRec(arr, n - 1)
-    
-    last = arr[n-1]
-    j = n-2
-    
+
+    last = arr[n - 1]
+    j = n - 2
+
     while arr[j] > last and j >= 0:
-        arr[j+1] = arr[j]
+        arr[j + 1] = arr[j]
         j = j - 1
-    
-    arr[j+1] = last
+
+    arr[j + 1] = last
 
 # merge_sort
+# Time Complexity: O(n log n), where n is the length of the array.
 def merge_sort(arr):
-    middle = len(arr)// 2
+    middle = len(arr) // 2
     arr1 = arr[:middle]
     arr2 = arr[middle:]
-    
+
     def merge_inner(arr1, arr2):
+        # Time Complexity of merge_inner: O(n), where n is len(arr1) + len(arr2).
         temp_arr = []
         while len(arr1) != 0 and len(arr2) != 0:
             if arr1[0] > arr2[0]:
@@ -116,34 +126,36 @@ def merge_sort(arr):
             else:
                 temp_arr.append(arr1[0])
                 arr1.remove(arr1[0])
-        
+
         while len(arr1) != 0:
-                temp_arr.append(arr1[0])
-                arr1.remove(arr1[0])  
-        
+            temp_arr.append(arr1[0])
+            arr1.remove(arr1[0])
+
         while len(arr2) != 0:
-                temp_arr.append(arr2[0])
-                arr2.remove(arr2[0])
-        
-        return temp_arr               
-    
+            temp_arr.append(arr2[0])
+            arr2.remove(arr2[0])
+
+        return temp_arr
+
     if len(arr) == 1:
         return arr
-    
+
     arr1 = merge_sort(arr1)
     arr2 = merge_sort(arr2)
-    
+
     return merge_inner(arr1, arr2)
 
 # heap sort
-def swap(i,j,arr):
-    arr[i],arr[j] = arr[j],arr[i]
+# Time Complexity: O(n log n), where n is the number of elements.
+def swap(i, j, arr):
+    arr[i], arr[j] = arr[j], arr[i]
 
 def buildHeap(arr, n, i):
+    # Time Complexity of buildHeap: O(log n) due to recursive calls.
     parent = i
-    left = 2*i + 1
-    right = 2*i + 2
-    
+    left = 2 * i + 1
+    right = 2 * i + 2
+
     if left < n and arr[parent] < arr[left]:
         parent = left
     if right < n and arr[parent] < arr[right]:
@@ -152,35 +164,33 @@ def buildHeap(arr, n, i):
         swap(i, parent, arr)
         buildHeap(arr, n, parent)
 
-def heapify(arr,n):
-    i = n//2 - 1   
-    for k in range(i,-1,-1):
+def heapify(arr, n):
+    # Time Complexity of heapify: O(n) for building a max heap.
+    i = n // 2 - 1
+    for k in range(i, -1, -1):
         buildHeap(arr, n, k)
 
 def heapsort(arr):
+    # Time Complexity of heapsort: O(n log n)
     n = len(arr)
     heapify(arr, n)
     for i in range(n - 1, 0, -1):
         swap(0, i, arr)
         buildHeap(arr, i, 0)
-"""        
-def heapsort(arr):
-    for n in range(len(arr), 0, -1):
-        heapify(arr, n)
-        swap(0, n - 1, arr)
-"""
+
 # quicksort
+# Time Complexity: O(n log n) on average, but O(n^2) in the worst case.
 def partition(arr, current_index, pivot):
     swap_marker = current_index - 1
     while current_index <= pivot:
         if arr[current_index] > arr[pivot]:
-            current_index +=1
+            current_index += 1
             continue
         if arr[current_index] <= arr[pivot]:
-            swap_marker+=1
+            swap_marker += 1
             if current_index > swap_marker:
                 arr[current_index], arr[swap_marker] = arr[swap_marker], arr[current_index]
-            current_index +=1
+            current_index += 1
     return swap_marker
 
 def quicksort(arr, left=0, right=None):
@@ -193,6 +203,7 @@ def quicksort(arr, left=0, right=None):
 
 # maximum Depth of Binary Tree
 class Solution(object):
+    # Time Complexity: O(n), where n is the number of nodes, as we visit each node once.
     def maxDepth(self, root):
         """
         :type root: Optional[TreeNode]
@@ -202,7 +213,7 @@ class Solution(object):
         res = 0
 
         while stack:
-            node, depth = stack.pop()            
+            node, depth = stack.pop()
             if node:
                 if res < depth:
                     res = depth
@@ -210,26 +221,9 @@ class Solution(object):
                 stack.append([node.right, depth + 1])
         return res
 
-class Solution(object):
-    def maxDepth(self, root):
-        """
-        :type root: Optional[TreeNode]
-        :rtype: int
-        """
-        stack = [[root, 0]]
-        res = 0
-
-        while stack:
-            node, depth = stack.pop()
-            if res < depth:
-                res = depth           
-            if node:
-                stack.append([node.left, depth + 1])
-                stack.append([node.right, depth + 1])
-        return res
-
 # recursive maximum Depth of Binary Tree
 class Solution(object):
+    # Time Complexity: O(n) for each recursive call on each node.
     def maxDepth(self, root):
         """
         :type root: Optional[TreeNode]
@@ -237,39 +231,40 @@ class Solution(object):
         """
         if not root:
             return 0
-        
+
         return 1 + max(self.maxDepth(root.left), self.maxDepth(root.right))
-        
-# strassens matrix miltiplication
-def brute_force(A,B):
+
+# strassens matrix multiplication
+def brute_force(A, B):
+    # Time Complexity: O(n^3), where n is the matrix dimension.
     C = np.zeros_like(A)
     for i in range(A.shape[0]):
         for j in range(B.shape[1]):
             for k in range(A.shape[1]):
-                C[i][j] += A[i][k]*B[k][j]
+                C[i][j] += A[i][k] * B[k][j]
     return C
 
-
 def split_matrix(matrix):
+    # Time Complexity: O(1), as it simply slices the matrix.
     n = len(matrix)
-    return matrix[:n//2, :n//2], matrix[:n//2,n//2:], matrix[n//2:,:n//2], matrix[n//2:,n//2:]
+    return matrix[:n // 2, :n // 2], matrix[:n // 2, n // 2:], matrix[n // 2:, :n // 2], matrix[n // 2:, n // 2:]
 
-def strassens(A,B):
+def strassens(A, B):
+    # Time Complexity: O(n^log7) ≈ O(n^2.81) due to recursive multiplications and additions.
     if len(A) <= 2:
-        return brute_force(A,B)
-    a,b,c,d = split_matrix(A)
-    e,f,g,h = split_matrix(B)
-    M1 = strassens(a + d, e + h)
-    M2 = strassens(c + d, e)
-    M3 = strassens(a, f - h)
-    M4 = strassens(d, g - e)
-    M5 = strassens(a + b, h)
-    M6 = strassens(c - a, e + f)
-    M7 = strassens(b - d, g + h)
-    
-    C11 = M1 + M4 - M5 + M7
-    C12 = M3 + M5
-    C21 = M2 + M4
-    C22 = M1 - M2 + M3 + M6
-    
-    return np.vstack((np.hstack((C11,C12)), np.hstack((C21,C22))))
+        return brute_force(A, B)
+    a, b, c, d = split_matrix(A)
+    e, f, g, h = split_matrix(B)
+
+    p1 = strassens(a, f - h)
+    p2 = strassens(a + b, h)
+    p3 = strassens(c + d, e)
+    p4 = strassens(d, g - e)
+    p5 = strassens(a + d, e + h)
+    p6 = strassens(b - d, g + h)
+    p7 = strassens(a - c, e + f)
+
+    top = np.hstack((p5 + p4 - p2 + p6, p1 + p2))
+    bottom = np.hstack((p3 + p4, p1 + p5 - p3 - p7))
+
+    return np.vstack((top, bottom))
