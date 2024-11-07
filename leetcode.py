@@ -268,3 +268,19 @@ def strassens(A, B):
     bottom = np.hstack((p3 + p4, p1 + p5 - p3 - p7))
 
     return np.vstack((top, bottom))
+    
+# merge alternatively
+class Solution(object):
+    def mergeAlternately(self, word1, word2):
+        result = ''
+        count = 0
+
+        while count < len(word1) or count < len(word2):
+            if count < len(word1):
+                result += word1[count]
+            if count < len(word2):
+                result += word2[count]
+            count +=1
+        
+        return result
+        
