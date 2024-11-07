@@ -260,3 +260,21 @@ var maxDepth = function(root) {
 };
     }
 }
+
+// merge alternatively
+var mergeAlternately = function(word1, word2) {
+    let count = 0;
+    let result = '';
+
+    while (word1.length > count || word2.length > count) {
+        if (word1.length > count) {
+            result += word1[count];
+        }
+
+        if (word2.length > count) {
+            result += word2[count];
+        }
+        count +=1;
+    }
+    return result;
+};
