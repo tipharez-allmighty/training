@@ -1,3 +1,13 @@
+# Greatest Common Divisor of Strings
+class Solution:
+    def gcdOfStrings(self, str1: str, str2: str) -> str: 
+        for i in range(min(len(str1), len(str2)), 0, -1):        
+            if (len(str2) % i) == 0 and (len(str1) % i) == 0:
+                n1, n2 = len(str1) // i, len(str2) // i
+                if str1 == n1*str1[:i] and str2 == n2*str1[:i]:
+                    return str1[:i]
+        return ''
+
 # binary search
 class Solution:
     # Time Complexity: O(log n) because we split the search space in half each iteration.
