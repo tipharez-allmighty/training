@@ -1,3 +1,18 @@
+// Greatest Common Divisor of Strings
+var gcdOfStrings = function(str1, str2) {
+    for (let i=Math.min(str1.length, str2.length); i>0; i--) {
+        if (str1.length % i === 0 && str2.length % i === 0) {
+            n1 = str1.length / i;
+            n2 = str2.length / i;
+            base = str1.slice(0,i)
+            if (str1 === base.repeat(n1) && str2 === base.repeat(n2)) {
+                return base;
+            }
+        return '';
+        }
+    }
+};
+
 // binary search
 var search = function(nums, target) {
     low = 0;
