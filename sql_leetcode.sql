@@ -93,7 +93,7 @@ GROUP BY a.machine_id;
 /*
 577. Employee Bonus
 */
-SELECT employee.name, Bonus AS bonus
+SELECT Employee.name, Bonus AS bonus
 FROM Employee
 LEFT JOIN Bonus ON Employee.empID = Bonus.empID
 WHERE bonus is NULL or bonus < 1000;
