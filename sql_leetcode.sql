@@ -291,3 +291,15 @@ FROM Employee AS e1
 JOIN Employee AS e2 ON e1.id = e2.managerId
 GROUP BY e2.managerId
 HAVING COUNT(e2.managerId) >= 5;
+
+/*
+1934. Confirmation Rate
+*/
+SELECT s.user_id, COALESCE(
+    ROUND(
+        SUM(CASE WHEN c.action = 'confirmed' THEN 1 ELSE 0 END) / COUNT(c.action), 2),
+        0)
+     AS confirmation_rate
+FROM Signups AS s
+LEFT JOIN Confirmations AS c ON s.user_id = c.user_id
+GROUP BY s.user_id;
