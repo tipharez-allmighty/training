@@ -282,3 +282,12 @@ HAVING unit >= 100;
 SELECT *
 FROM Users
 WHERE mail REGEXP '^[A-Za-z][A-Za-z0-9_.-]*@leetcode[.]com$';
+
+/*
+570. Managers with at Least 5 Direct Reports
+*/
+SELECT e1.name
+FROM Employee AS e1
+JOIN Employee AS e2 ON e1.id = e2.managerId
+GROUP BY e2.managerId
+HAVING COUNT(e2.managerId) >= 5;
