@@ -253,7 +253,29 @@ var quicksort = function(arr, left=0, right=null) {
         let pivot = partition(arr, left, right);
         quicksort(arr, left, pivot - 1);
         quicksort(arr, pivot + 1, right);
+// count sort
+var count_search = function(nums, k) {
+    let counts = new Array(k).fill(0);
+    let result = new Array(nums.length).fill(0);
 
+    for (const num of nums) {
+        counts[num]++; 
+    };
+
+    for (let i = 1; i < counts.length; i++) {
+        counts[i] = counts[i-1] + counts[i];
+    };
+    
+    for (let i = nums.length - 1; i>-1; i--) {
+        let value = nums[i];
+        let result_position = counts[value] - 1;
+        result[result_position] = value;
+        counts[value]--;
+    };
+
+    return result;
+}
+        
 // maximum Depth of Binary Tree (recursive)
 /**
  * Definition for a binary tree node.
