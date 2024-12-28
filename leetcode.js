@@ -106,8 +106,7 @@ var search = function(nums, target) {
     return -1;  
 };
 
-// bubble sore
-
+// bubble sort
 var bubble_sort = function(nums) {
     size = nums.length;
     for (i = 0; i < size - 1; i++) {
@@ -253,6 +252,7 @@ var quicksort = function(arr, left=0, right=null) {
         let pivot = partition(arr, left, right);
         quicksort(arr, left, pivot - 1);
         quicksort(arr, pivot + 1, right);
+        
 // count sort
 var count_search = function(nums, k) {
     let counts = new Array(k).fill(0);
