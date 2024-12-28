@@ -211,6 +211,27 @@ def quicksort(arr, left=0, right=None):
         quicksort(arr, left, pivot - 1)
         quicksort(arr, pivot + 1, right)
 
+# countsort
+# Time Complexity: O(n + k), where n is the number of elements in the array, and k is the range of the input values.
+# Space Complexity: O(n + k), as additional space is required for the count array and output array.
+# Note: Counting Sort is not a comparison-based algorithm and is efficient for small ranges of integers, 
+# but it is not suitable for sorting data with large ranges or floating-point numbers.
+def count_sort(nums, k):
+    counts = [0]*k
+    result = [0]*len(nums)
+    
+    for num in nums:
+        counts[num] +=1
+    for i in range(1, len(counts)):
+        counts[i] = counts[i-1] + counts[i]
+
+    for i in range(len(nums) -1,-1,-1):
+        value = nums[i]
+        result_position = counts[value] - 1
+        result[result_position] = value
+        counts[value] -=1
+    return result
+    
 # maximum Depth of Binary Tree
 class Solution(object):
     # Time Complexity: O(n), where n is the number of nodes, as we visit each node once.
