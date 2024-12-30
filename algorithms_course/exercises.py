@@ -72,3 +72,55 @@ def check_same_frequency(list1, list2):
         return counter
     
     return count_elements(list1) == count_elements(list2)
+
+# Tuples
+
+# Sum and Product
+def sum_product(input_tuple):
+    sum_result = 0
+    product_result = 1
+    for number in input_tuple:
+        sum_result +=number
+        product_result *=number
+    return sum_result, product_result
+
+# Elementwise Sum
+def tuple_elementwise_sum(tuple1, tuple2):
+    return tuple(map(sum, zip(tuple1, tuple2)))
+
+def tuple_elementwise_sum(t1, t2):
+    if len(t1) != len(t2):
+        raise ValueError("Input tuples must have the same length.")
+ 
+    result = tuple(a + b for a, b in zip(t1, t2))
+    return result
+
+# Insert at the Beginning
+def insert_value_front(input_tuple, value_to_insert):
+    new_tuple = value_to_insert,
+    return new_tuple + input_tuple
+
+# Diagonal
+def get_diagonal(tup):
+    output_tuple = []
+    j = 0
+    for inner_tuple in tup:
+        output_tuple.append(inner_tuple[j])
+        j+=1
+    
+    return tuple(output_tuple)
+
+def get_diagonal(input_tuple):
+    return tuple(input_tuple[i][i] for i in range(len(input_tuple)))
+
+# Common Elements
+def common_elements(tuple1, tuple2):
+    result = []
+    for element in tuple1:
+        if element in tuple2:
+            result.append(element)
+            
+    return tuple(set(result))
+
+def common_elements(tuple1, tuple2):
+    return tuple(set(tuple1) & set(tuple2))
