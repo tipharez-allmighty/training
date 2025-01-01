@@ -1,10 +1,23 @@
+class EmptyLinkedListError(Exception):
+    """Raised when an operation is attempted on an empty linked list."""
+    pass
+
+def empty_check(func):
+    def wrapper(self, *args, **kwargs):
+        if self.head is None:
+            raise EmptyLinkedListError("Linked list is empty")
+        return func(self, *args, **kwargs)
+
+    return wrapper
+
 class Node:
     def __init__(self, key):
         self.key = key
         self.next = None
 
     def __repr__(self):
-        return f"Node(key={self.key}, next={self.next})"
+        next_key = self.next.key if self.next is not None else None
+        return f"Node(key={self.key}, next={next_key})"
 
 
 class LinkedList:
@@ -18,7 +31,7 @@ class LinkedList:
         result = ""
 
         while temp_node is not None:
-            result += str(temp_node.key)
+            result += f"Node({temp_node.key})"
 
             if temp_node.next is not None:
                 result += " -> "
@@ -27,12 +40,15 @@ class LinkedList:
 
         return f"LinkedList({result}, length={self.length})"
 
+    @empty_check
     def traverse(self):
         current = self.head
-        
+
         while current is not None:
+            print(current)
             current = current.next
-    
+
+    @empty_check
     def search(self, value):
         current = self.head
         index = 0
@@ -40,7 +56,35 @@ class LinkedList:
             if current.key == value:
                 return current, index
             current = current.next
-            index +=1
+            index += 1
+
+    @empty_check
+    def search_all(self, value):
+        current = self.head
+        result = []
+
+        while True:
+            if current.key == value:
+                result.append(current)
+            current = current.next
+
+            if current == None:
+                return result
+
+    @empty_check
+    def get_by_index(self, index):
+        if index >= self.length or index < 0:
+            raise ValueError("Index is out of range")
+
+        current = self.head
+        count = 0
+
+        while True:
+            if count == index:
+                return current
+
+            current = current.next
+            count += 1
 
     def append(self, value):
         new_node = Node(value)
@@ -89,10 +133,70 @@ class LinkedList:
                 self.tail = new_node
 
             else:
-                for i in range(index - 1):
+                for _ in range(index - 1):
                     temp_node = temp_node.next
 
                 new_node.next = temp_node.next
                 temp_node.next = new_node
 
         self.length += 1
+
+    @empty_check
+    def set_value(self, index, value):
+        if index >= self.length or index < 0:
+            raise ValueError("Index is out of range")
+
+        current_node = self.get_by_index(index)
+        current_node.key = value
+
+    @empty_check
+    def popfirst(self):
+        node_to_pop = self.head
+        if self.length == 1:
+            self.head = None
+            self.tail = None
+        else:
+            self.head = self.head.next
+
+        self.length -= 1
+        return node_to_pop
+
+    @empty_check
+    def pop(self):
+        node_to_pop = self.tail
+        if self.length == 1:
+            self.head = None
+            self.tail = None
+        else:
+            current = self.head
+            while current.next != self.tail:
+                current = current.next
+
+            current.next = None
+            self.tail = current
+
+        self.length -= 1
+        return node_to_pop
+
+    @empty_check
+    def remove_by_index(self, index):
+        if index >= self.length or index < 0:
+            raise ValueError("Index is out of range")
+
+        if index == 0:
+            self.head = self.head.next
+            if self.length == 1:
+                self.tail = None
+
+        else:
+            prev_node = self.get_by_index(index=index - 1)
+            prev_node.next = prev_node.next.next
+
+            if index == self.length - 1:
+                self.tail = prev_node
+        self.length -= 1
+
+    def delete_all(self):
+        self.head = None
+        self.tail = None
+        self.length = 0
