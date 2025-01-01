@@ -200,3 +200,21 @@ class LinkedList:
         self.head = None
         self.tail = None
         self.length = 0
+
+    @empty_check
+    def reversed(self):
+        if self.length == 1:
+            return
+        
+        prev_node = None
+        current_node = self.head
+        
+        while current_node:
+            temp_node = current_node.next
+            current_node.next = prev_node
+            prev_node = current_node
+            current_node = temp_node
+        
+        self.tail = self.head
+        self.head = prev_node
+        
