@@ -124,3 +124,52 @@ def common_elements(tuple1, tuple2):
 
 def common_elements(tuple1, tuple2):
     return tuple(set(tuple1) & set(tuple2))
+
+# Singly Linked lists
+
+# Merge Two Sorted Linked List
+    def mergeTwoLists(self, l1, l2):
+        dummy = ListNode()
+        tail = dummy
+        
+        while l1 is not None or l2 is not None:
+            if l1 is None:
+                tail.next = l2
+                l2 = l2.next
+            elif l2 is None:
+                tail.next = l1
+                l1 = l1.next
+            elif l1.val <= l2.val:
+                tail.next = l1
+                l1 = l1.next
+            else:
+                tail.next = l2
+                l2 = l2.next
+            tail = tail.next
+        
+        return dummy.next
+
+    def mergeTwoLists(self, l1, l2):
+        """
+        :type list1: Optional[ListNode]
+        :type list2: Optional[ListNode]
+        :rtype: Optional[ListNode]
+        """
+        prehead = ListNode(-1)
+ 
+        prev = prehead
+        while l1 and l2:
+            if l1.val <= l2.val:
+                prev.next = l1
+                l1 = l1.next
+            else:
+                prev.next = l2
+                l2 = l2.next            
+            prev = prev.next
+ 
+        # At least one of l1 and l2 can still have nodes at this point, so connect
+        # the non-null list to the end of the merged list.
+        prev.next = l1 if l1 is not None else l2
+ 
+        return prehead.next
+
