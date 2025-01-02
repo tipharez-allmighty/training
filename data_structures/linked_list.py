@@ -10,6 +10,31 @@ def empty_check(func):
 
     return wrapper
 
+def mergeTwoSortedLists(list1:LinkedList, list2: LinkedList) -> Node:
+    result = LinkedList()
+    
+    if list1.length == 0 and list2.length == 0:
+        return result.head
+    
+    current1 = list1.head
+    current2 = list2.head
+    
+    while current1 is not None or current2 is not None:
+        if current1 is None:
+            result.append(current2.key)
+            current2 = current2.next
+        elif current2 is None:
+            result.append(current1.key)
+            current1 = current1.next
+        elif current1.key <= current2.key:
+            result.append(current1.key)
+            current1 = current1.next
+        else:
+            result.append(current2.key)
+            current2 = current2.next
+    
+    return result
+
 class Node:
     def __init__(self, key):
         self.key = key
@@ -218,3 +243,36 @@ class LinkedList:
         self.tail = self.head
         self.head = prev_node
         
+    @empty_check
+    def find_middle(self):
+        if self.length == 1:
+            return self.head
+        
+        slow = self.head
+        fast = self.head
+        
+        while fast is not None and fast.next is not None:
+            slow = slow.next
+            fast = fast.next.next
+        
+        return slow
+    
+    @empty_check
+    def remove_duplicates(self):
+        if self.length == 1:
+            return self.head
+        
+        seen_value = set()
+        current = self.head
+        seen_value.add(current.key)
+        
+        while current.next:
+            if current.next.key in seen_value:
+                current.next = current.next.next
+                self.length -= 1
+                
+            else:
+                seen_value.add(current.next.key)
+                current = current.next
+                
+        self.tail = current
