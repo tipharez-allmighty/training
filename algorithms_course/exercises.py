@@ -211,3 +211,30 @@ def reverseList(self, head):
         prev = curr
         curr = temp_node
     return prev
+
+# Palindrome Linked List
+def isPalindrome(self, head):
+    fast = head
+    slow = head
+    while fast and fast.next:
+        fast = fast.next.next
+        slow = slow.next
+    
+    prev = None
+    
+    while slow:
+        temp_node = slow.next
+        slow.next = prev
+        prev = slow
+        slow = temp_node
+    
+    left, right = head, prev
+    
+    while right:
+        if left.val != right.val:
+            return False
+        
+        left = left.next
+        right = right.next
+    
+    return True
