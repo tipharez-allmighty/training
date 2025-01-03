@@ -238,3 +238,14 @@ def isPalindrome(self, head):
         right = right.next
     
     return True
+
+# Middle of the Linked List
+def middleNode(self, head):
+    fast = head
+    slow = head
+    
+    while fast and fast.next:
+        fast = fast.next.next
+        slow = slow.next
+    
+    return slow
