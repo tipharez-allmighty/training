@@ -129,59 +129,59 @@ def common_elements(tuple1, tuple2):
 
 # Merge Two Sorted Linked List 
 # Time Complexity: O(n + m), Space Complexity: O(1)
-    def mergeTwoLists(self, l1, l2):
-        dummy = ListNode()
-        tail = dummy
-        
-        while l1 is not None or l2 is not None:
-            if l1 is None:
-                tail.next = l2
-                l2 = l2.next
-            elif l2 is None:
-                tail.next = l1
-                l1 = l1.next
-            elif l1.val <= l2.val:
-                tail.next = l1
-                l1 = l1.next
-            else:
-                tail.next = l2
-                l2 = l2.next
-            tail = tail.next
-        
-        return dummy.next
+def mergeTwoLists(self, l1, l2):
+    dummy = ListNode()
+    tail = dummy
+    
+    while l1 is not None or l2 is not None:
+        if l1 is None:
+            tail.next = l2
+            l2 = l2.next
+        elif l2 is None:
+            tail.next = l1
+            l1 = l1.next
+        elif l1.val <= l2.val:
+            tail.next = l1
+            l1 = l1.next
+        else:
+            tail.next = l2
+            l2 = l2.next
+        tail = tail.next
+    
+    return dummy.next
 
-    def mergeTwoLists(self, l1, l2):
-        """
-        :type list1: Optional[ListNode]
-        :type list2: Optional[ListNode]
-        :rtype: Optional[ListNode]
-        """
-        prehead = ListNode(-1)
- 
-        prev = prehead
-        while l1 and l2:
-            if l1.val <= l2.val:
-                prev.next = l1
-                l1 = l1.next
-            else:
-                prev.next = l2
-                l2 = l2.next            
-            prev = prev.next
- 
-        # At least one of l1 and l2 can still have nodes at this point, so connect
-        # the non-null list to the end of the merged list.
-        prev.next = l1 if l1 is not None else l2
- 
-        return prehead.next
+def mergeTwoLists(self, l1, l2):
+    """
+    :type list1: Optional[ListNode]
+    :type list2: Optional[ListNode]
+    :rtype: Optional[ListNode]
+    """
+    prehead = ListNode(-1)
+
+    prev = prehead
+    while l1 and l2:
+        if l1.val <= l2.val:
+            prev.next = l1
+            l1 = l1.next
+        else:
+            prev.next = l2
+            l2 = l2.next            
+        prev = prev.next
+
+    # At least one of l1 and l2 can still have nodes at this point, so connect
+    # the non-null list to the end of the merged list.
+    prev.next = l1 if l1 is not None else l2
+
+    return prehead.next
 
 # Remove Duplicates
 # Time Complexity: O(n), Space Complexity: O(1)
-    def deleteDuplicates(self, head):
-        current = head
-        while current and current.next:
-            if current.val == current.next.val:
-                current.next = current.next.next
-            else:
-                current = current.next
-        return head
+def deleteDuplicates(self, head):
+    current = head
+    while current and current.next:
+        if current.val == current.next.val:
+            current.next = current.next.next
+        else:
+            current = current.next
+    return head
 
