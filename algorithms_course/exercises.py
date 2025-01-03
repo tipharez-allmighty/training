@@ -127,7 +127,8 @@ def common_elements(tuple1, tuple2):
 
 # Singly Linked lists
 
-# Merge Two Sorted Linked List
+# Merge Two Sorted Linked List 
+# Time Complexity: O(n + m), Space Complexity: O(1)
     def mergeTwoLists(self, l1, l2):
         dummy = ListNode()
         tail = dummy
@@ -174,6 +175,7 @@ def common_elements(tuple1, tuple2):
         return prehead.next
 
 # Remove Duplicates
+# Time Complexity: O(n), Space Complexity: O(1)
     def deleteDuplicates(self, head):
         current = head
         while current and current.next:
