@@ -185,3 +185,29 @@ def deleteDuplicates(self, head):
             current = current.next
     return head
 
+# Remove Linked List Elements
+def removeElements(self, head, val):
+    dummy = ListNode(0)
+    dummy.next = head
+    prev = dummy
+    current = head
+
+    while current:
+        if current.val == val:
+            prev.next = current.next
+        else:
+            prev = current
+        current = current.next
+        
+    return dummy.next
+
+# Reverse Linked List
+def reverseList(self, head):
+    prev = None
+    curr = head
+    while curr:
+        temp_node = curr.next
+        curr.next = prev
+        prev = curr
+        curr = temp_node
+    return prev
