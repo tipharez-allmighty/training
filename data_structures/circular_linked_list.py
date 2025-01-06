@@ -205,8 +205,30 @@ class CLinkedList:
                 self.tail = prev_node
         
         self.length -= 1
+    
+    @empty_check
+    def delete_by_value(self, value):
+        if self.head.value == value:
+            if self.head == self.tail:
+                self.head = None
+                self.tail = None
+            else:
+                self.head = self.head.next
+                self.tail.next = self.head
+        else:
+            prev = self.head
+            while prev.next.value != value:
+                prev = prev.next
+                
+            node_to_delete = prev.next
+            if node_to_delete == self.tail:
+                self.tail = prev
+            prev.next = prev.next.next
 
+        self.length -= 1
+        
     def delete_all(self):
         self.head = None
         self.tail = None
         self.length = 0
+        
