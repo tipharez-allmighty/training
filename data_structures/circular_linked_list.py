@@ -2,7 +2,6 @@ class EmptyLinkedListError(Exception):
     """Raised when an operation is attempted on an empty linked list."""
     pass
 
-
 def empty_check(func):
     def wrapper(self, *args, **kwargs):
         if self.head is None:
