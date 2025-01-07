@@ -227,8 +227,116 @@ class CLinkedList:
 
         self.length -= 1
         
+    @empty_check
+    def split_list_return_nodes(self):
+        if self.head.next == self.head:
+            return self.head
+        
+        slow = self.head
+        fast = self.head
+        while fast.next != self.head and fast.next.next != self.head:
+            slow = slow.next
+            fast = fast.next.next
+        
+        if fast.next.next == self.head:
+            fast = fast.next
+        
+        head1 = self.head
+        head2 = slow.next
+        
+        fast.next = slow.next
+        
+        slow.next = self.head
+        
+        return head1, head2
+    
+    @empty_check            
+    def split_list_return_lists(self):
+        if self.length == 0:
+            return None, None
+ 
+        mid = (self.length + 1) // 2
+
+ 
+        first_list = CLinkedList()
+        second_list = CLinkedList()
+ 
+        current = self.head
+        
+        count = 0
+        while count < mid:
+            first_list.append(current.value)
+            current = current.next
+            count += 1
+        
+        first_list.tail.next = first_list.head
+
+        while count < self.length:
+            second_list.append(current.value)
+            current = current.next
+            count += 1
+        
+        return first_list, second_list
+
+    @empty_check
+    def is_sorted(self):
+        if self.length == 1:
+            return True
+        
+        current = self.head
+        while current.next != self.head:
+            if current.value > current.next.value:
+                return False
+            current = current.next
+            
+        return True
+
+    def insert_into_sorted(self, data):
+        new_node = Node(data)
+        if not self.head:
+            new_node.next = new_node
+            self.head = new_node
+            
+        if self.head.data <= data:
+            tail_node = self.head
+            while tail_node.next != self.head:
+                tail_node = tail_node.next
+            
+            new_node.next = self.head
+            tail_node.next = new_node
+            return
+        
+        current = self.head
+        next_to_current = self.head.next
+        while current.next != self.head:
+            if current.data < data and next_to_current.data >= data:
+                new_node.next = next_to_current
+                current.next = new_node
+                return
+            else:
+                current = current.next
+                next_to_current = next_to_current.next
+        
+        new_node.next = self.head
+        current.next = new_node
+    
+    @empty_check    
+    def josephus_circle(self, step):
+        if self.head == self.tail:
+            return self.head
+        
+        current = self.head
+        while self.length > 1:
+            count = 1
+            while count != step:
+                current = current.next
+                count += 1
+            self.delete_by_value(current.value)
+            current = current.next
+                
+        return current   
+        
     def delete_all(self):
         self.head = None
         self.tail = None
         self.length = 0
-        
