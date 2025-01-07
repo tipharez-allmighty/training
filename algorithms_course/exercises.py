@@ -249,3 +249,45 @@ def middleNode(self, head):
         slow = slow.next
     
     return slow
+
+# Middle of the Linked List
+def middleNode(self, head):
+    fast = head
+    slow = head
+    
+    while fast and fast.next:
+        fast = fast.next.next
+        slow = slow.next
+    
+    return slow
+    
+#Insert into a Sorted Circular Linked List
+def insert_into_sorted(self, data):
+    new_node = Node(data)
+
+    if not self.head:
+        new_node.next = new_node
+        self.head = new_node
+        return
+    
+    if data < self.head.data:
+        tail_node = self.head
+        while tail_node.next != self.head:
+            tail_node = tail_node.next
+        new_node.next = self.head
+        tail_node.next = new_node
+        self.head = new_node
+        return
+    
+    current = self.head
+    while current.next != self.head:
+        if current.data <= data < current.next.data:
+            new_node.next = current.next
+            current.next = new_node
+            return
+        current = current.next
+
+    current.next = new_node
+    new_node.next = self.head
+            
+        
