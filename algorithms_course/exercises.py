@@ -290,4 +290,31 @@ def insert_into_sorted(self, data):
     current.next = new_node
     new_node.next = self.head
             
-        
+# Josephus Circle using Circular Linked List
+def josephus_circle(self, step):
+    if self.head == self.head.next:
+        return self.head
+    temp = self.head
+    count = 0
+    while self.head != self.head.next:
+        count += 1
+        if count == step:
+            self.delete_node(temp.data)
+            print('Removed', str(temp))
+            temp = temp.next
+            count = 0
+        else:
+            temp = temp.next
+            
+def josephus_circle(self, step):
+    temp = self.head
+
+    while self.count_nodes() > 1:
+        count = 1
+        while count != step:
+            temp = temp.next
+            count += 1
+        self.delete_node(temp.data)
+        temp = temp.next
+
+    return f"Last person left standing: {temp.data}"
