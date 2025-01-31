@@ -112,7 +112,7 @@ class DoubleLinkedList:
         return current
 
     @empty_check
-    def set(self, index, value):
+    def set_value(self, index, value):
         if index < 0 or index >= self.length:
             raise IndexError('Index is out of range')
         
