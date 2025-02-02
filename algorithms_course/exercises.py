@@ -324,3 +324,18 @@ def josephus_circle(self, step):
         temp = temp.next
 
     return f"Last person left standing: {temp.data}"
+
+# nth element to last
+def nth_to_last(ll, n):
+    p1 = ll.head
+    p2 = ll.head
+    
+    for i in range(n):
+        if not p2:
+            return None
+        p2 = p2.next
+    while p2:
+        p1 = p1.next
+        p2 = p2.next
+    
+    return p1.value
