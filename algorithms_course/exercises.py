@@ -174,7 +174,7 @@ def mergeTwoLists(self, l1, l2):
 
     return prehead.next
 
-# Remove Duplicates
+# Remove Duplicates (sorted)
 # Time Complexity: O(n), Space Complexity: O(1)
 def deleteDuplicates(self, head):
     current = head
@@ -185,6 +185,23 @@ def deleteDuplicates(self, head):
             current = current.next
     return head
 
+# Remove Duplicates
+# Time Complexity: O(n^2), Space Complexity: O(1)
+def remove_duplicates(ll):
+    current = ll.head
+    prev_node = None
+    while current:
+        runner = current
+        while runner.next:
+            if runner.next.value == current.value:
+                runner.next = runner.next.next
+            else:
+                runner = runner.next
+        prev_node = current
+        current = current.next
+    
+    ll.tail = prev_node
+    
 # Remove Linked List Elements
 def removeElements(self, head, val):
     dummy = ListNode(0)
@@ -238,17 +255,6 @@ def isPalindrome(self, head):
         right = right.next
     
     return True
-
-# Middle of the Linked List
-def middleNode(self, head):
-    fast = head
-    slow = head
-    
-    while fast and fast.next:
-        fast = fast.next.next
-        slow = slow.next
-    
-    return slow
 
 # Middle of the Linked List
 def middleNode(self, head):
