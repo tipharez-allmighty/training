@@ -339,3 +339,39 @@ def nth_to_last(ll, n):
         p2 = p2.next
     
     return p1.value
+
+# Partition around value
+# Time Complexity: O(n), Space Complexity: O(1)
+def partition(self, head, x):
+    left, right = list_node(), list_node()
+    lt, rt = left, right
+
+    while head:
+        if head.value < x:
+            lt.next = head
+            lt = lt.next
+        else:
+            rt.next = head
+            rt = rt.next
+        head = head.next
+
+    lt.next = right
+    rt.next = None
+    return left.next
+# Add two numbers
+def addTwoNumbers(self, l1, l2):
+    dummy = ListNode()
+    curr = dummy
+    carry = 0
+    while l1 or l2 or carry:
+        v1 = l1.val if l1 else 0
+        v2 = l2.val if l2 else 0
+        result = v1 + v2 + carry
+        carry = result // 10
+        result = result % 10
+        curr.next = ListNode(result)
+        curr = curr.next
+        l1 = l1.next if l1 else None
+        l2 = l2.next if l2 else None
+    
+    return dummy.next
