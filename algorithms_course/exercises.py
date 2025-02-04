@@ -375,3 +375,43 @@ def addTwoNumbers(self, l1, l2):
         l2 = l2.next if l2 else None
     
     return dummy.next
+
+# Intersection of Two Linked Lists
+class Solution(object):
+    def getIntersectionNode(self, headA, headB):
+        countA = 0
+        countB = 0
+        current1 = headA
+        current2 = headB
+
+        while current1:
+            countA += 1
+            current1 = current1.next
+
+        while current2:
+            countB += 1
+            current2 = current2.next
+
+        while countA > countB:
+            headA = headA.next
+            countA -= 1
+        while countB > countA:
+            headB = headB.next
+            countB -= 1
+
+
+        while headA and headB:
+            if headA == headB:
+                return headA
+            headA = headA.next
+            headB = headB.next
+
+        return None
+
+# Intersection of Two Linked Lists
+def getIntersectionNode(self, headA, headB):
+    l1, l2 = headA, headB
+    while l1 != l2:
+        l1 = l1.next if l1 else headB
+        l2 = l2.next if l2 else headA
+    return l1
