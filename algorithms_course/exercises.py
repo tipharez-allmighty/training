@@ -358,6 +358,7 @@ def partition(self, head, x):
     lt.next = right
     rt.next = None
     return left.next
+    
 # Add two numbers
 def addTwoNumbers(self, l1, l2):
     dummy = ListNode()
@@ -377,6 +378,7 @@ def addTwoNumbers(self, l1, l2):
     return dummy.next
 
 # Intersection of Two Linked Lists
+# Time Complexity: O(m + n), Space Complexity: O(1)
 class Solution(object):
     def getIntersectionNode(self, headA, headB):
         countA = 0
@@ -409,6 +411,7 @@ class Solution(object):
         return None
 
 # Intersection of Two Linked Lists
+# Time Complexity: O(m + n), Space Complexity: O(1)
 def getIntersectionNode(self, headA, headB):
     l1, l2 = headA, headB
     while l1 != l2:
