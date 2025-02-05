@@ -409,7 +409,47 @@ class Solution(object):
             headB = headB.next
 
         return None
+        
+# Intersection of Two Linked Lists
+# Time Complexity: O(m + n), Space Complexity: O(1)       
+class Solution:
+    def getIntersectionNode(self, headA: ListNode, headB: ListNode):
+        countA = 0
+        countB = 0
+        currentA = headA
+        currentB = headB
 
+        while currentA:
+            countA+=1
+            currentA = currentA.next
+
+        while currentB:
+            countB+=1
+            currentB = currentB.next
+        
+        step = 0
+        if countA > countB:
+            step = countA - countB
+            while step !=0:
+                headA = headA.next
+                step -=1
+        elif countB > countA:
+            step = countB - countA
+            while step !=0:
+                headB = headB.next
+                step -=1
+        else:
+            pass
+        while headA or headB:
+            if headA == headB:
+                return headA
+            if headA:
+                headA = headA.next
+            if headB:
+                headB = headB.next
+        
+        return None
+        
 # Intersection of Two Linked Lists
 # Time Complexity: O(m + n), Space Complexity: O(1)
 def getIntersectionNode(self, headA, headB):
