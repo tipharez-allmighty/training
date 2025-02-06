@@ -25,7 +25,7 @@ class Stack:
         else:
             raise IndexError('Stack is empty')
     
-    def peak(self):
+    def peek(self):
         if not self.isEmpty():
             return self.stack[-1]
         else:
