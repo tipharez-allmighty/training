@@ -16,13 +16,13 @@ class Stack:
         if not self.isEmpty():
             return self.stack.pop()
         else:
-            raise AttributeError('Stack is empty')
+            raise IndexError('Stack is empty')
     
     def peak(self):
         if not self.isEmpty():
             return self.stack[-1]
         else:
-            raise AttributeError('Stack is empty')
+            raise IndexError('Stack is empty')
     
     def delete(self):
         self.stack = []
