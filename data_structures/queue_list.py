@@ -19,3 +19,12 @@ class Queue:
             return value_to_return
         else:
             raise IndexError('Queue is empty')
+    
+    def peek(self):
+        if not self.isEmpty():
+            return self.queue[0]
+        else:
+            raise IndexError('Queue is empty')
+    
+    def delete(self):
+        self.queue = []
