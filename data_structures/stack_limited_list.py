@@ -17,19 +17,19 @@ class Stack:
         if len(self.stack) < self.max_size:
             self.stack.append(value)
         else:
-            raise AttributeError('Stack is full')
+            raise IndexError('Stack is full')
             
     def pop(self):
         if not self.isEmpty():
             return self.stack.pop()
         else:
-            raise AttributeError('Stack is empty')
+            raise IndexError('Stack is empty')
     
     def peak(self):
         if not self.isEmpty():
             return self.stack[-1]
         else:
-            raise AttributeError('Stack is empty')
+            raise IndexError('Stack is empty')
     
     def delete(self):
         self.stack = []
