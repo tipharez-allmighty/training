@@ -41,3 +41,7 @@ class Queue:
             raise IndexError("Queue is empty")
         else:
             return self.queue.value
+
+    def delete(self):
+        self.queue = None  
+        
