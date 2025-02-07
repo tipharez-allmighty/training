@@ -22,7 +22,7 @@ class PriorityQueue:
     def change_priority(self, old_element, new_element):
         self.heap.update_by_element(old_element, new_element)
     
-    def change_priority_by_undex(self, new_element, index):
+    def change_priority_by_index(self, new_element, index):
         self.heap.update_by_index(self, new_element, index)
     
     def is_empty(self):
