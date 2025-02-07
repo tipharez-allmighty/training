@@ -8,40 +8,43 @@ class Node:
 
 class Queue:
     def __init__(self):
-        self.queue = None
-    
+        self.start = None
+        self.top = None
+        
     def __repr__(self):
-        return str(self.queue) if self.queue else ""
+        return str(self.start) if self.start else ""
     
     def isEmpty(self):
-        return self.queue == None
+        return self.start is None and self.top is None
     
     def enqueue(self, value):
         new_element = Node(value)
         if self.isEmpty():
-            self.queue = new_element
+            self.start = new_element
+            self.top = new_element
         else:
-            current = self.queue
-            while current.next:
-                current = current.next
-            current.next = new_element
-    
+            self.top.next = new_element
+            self.top = self.top.next
+                
     def dequeue(self):
         if self.isEmpty():
             raise IndexError("Queue is empty")
-        elif not self.queue.next:
-            self.queue = None
+            
+        dequeue_element = self.start.value
+        if self.start == self.top:
+            self.start = None
+            self.top = None
+            return dequeue_element
         else:
-            dequeue_element = self.queue.value
-            self.queue = self.queue.next
+            self.start = self.start.next
             return dequeue_element
     
     def peek(self):
         if self.isEmpty():
             raise IndexError("Queue is empty")
         else:
-            return self.queue.value
-
+            return self.start.value
+    
     def delete(self):
-        self.queue = None  
-        
+        self.start = None
+        self.top = None   
