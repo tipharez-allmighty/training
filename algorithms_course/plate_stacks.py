@@ -38,7 +38,6 @@ class PlateStacks:
             value_to_return = self.stacks[index].pop()
             if not self.stacks[index]:
                 self.stacks.pop(index)
-            
             return value_to_return
         else:
             raise IndexError('There is No Stack for this Index')
