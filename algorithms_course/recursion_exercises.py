@@ -61,6 +61,28 @@ def factorial(num):
         return 1
     return num * factorial(num - 1)
 
+# Fibonacci
+# O(2^n), O(n)
+def fib(num):
+    if num <= 1:
+        return num
+    return fib(num - 1) + fib(num - 2)
+
+# O(n), O(1)
+def fib(num):
+    if num <= 1:
+        return num
+    
+    prev1 = 1
+    prev2 = 0
+    
+    for _ in range(2, num + 1):
+        current = prev1 + prev2
+        prev2 = prev1
+        prev1 = current
+    
+    return current
+        
 # Product of the array
 def productOfArray(arr):
     if not arr:
@@ -72,3 +94,20 @@ def recursiveRange(num):
     if num == 0:
         return 0
     return num + recursiveRange(num - 1)
+
+# Reverse string
+def reverse_string_iter(string: str):
+    string_list = list(string)
+    left, right = 0, len(string) - 1
+    while left < right:
+        string_list[left], string_list[right] = string_list[right], string_list[left]
+        left += 1
+        right -= 1
+    
+    return ''.join(string_list)
+
+def reverse_string_rec(string: str):
+    if len(string) <=1:
+        return string
+    
+    return string[-1] + reverse_string_rec(string[:-1])
