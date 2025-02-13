@@ -39,3 +39,17 @@ def gcd_iter(num1, num2):
     for i in range(greater_num, 0, -1):
         if num1 % i == 0 and num2 % i == 0:
             return i
+
+# Decimal to binary
+def decimal_to_binary_iter(decimal: int):
+    binary = []
+    while decimal != 0:
+        remainder = decimal % 2
+        decimal = decimal // 2
+        binary.insert(0, remainder)
+    return binary
+
+def decimal_to_binary_rec(decimal: int):
+    if decimal == 0:
+        return 0
+    return decimal % 2 + 10 * decimal_to_binary_rec(decimal // 2)
