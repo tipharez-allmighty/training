@@ -27,3 +27,15 @@ def power_of_num_iter(num: int, power: int):
     if power < 0:
         result = 1 / result
     return result
+
+# Greatest Common Divisor
+def gcd_rec(num1, num2):
+    if num2 == 0:
+        return num1
+    return gcd_rec(num2, num1 % num2)
+
+def gcd_iter(num1, num2):
+    greater_num = num1 if num1 < num2 else num2
+    for i in range(greater_num, 0, -1):
+        if num1 % i == 0 and num2 % i == 0:
+            return i
