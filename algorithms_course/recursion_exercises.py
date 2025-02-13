@@ -66,3 +66,9 @@ def productOfArray(arr):
     if not arr:
         return 1
     return arr[0] * productOfArray(arr[1:])
+
+# Recursive range
+def recursiveRange(num):
+    if num == 0:
+        return 0
+    return num + recursiveRange(num - 1)
