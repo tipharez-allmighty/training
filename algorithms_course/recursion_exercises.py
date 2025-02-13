@@ -10,3 +10,20 @@ def sum_of_digits_iter(num: int):
         result += int(num % 10)
         num = num // 10
     return result
+
+# Power of the number
+def power_of_num_rec(num: int, power: int):
+    if power == 0:
+        return 1
+    return num * power_of_num_rec(num, power - 1)
+
+def power_of_num_iter(num: int, power: int):
+    result = 1
+    if num == 0:
+        return result
+    for _ in range(abs(power)):
+        result *= num
+    
+    if power < 0:
+        result = 1 / result
+    return result
