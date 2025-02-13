@@ -53,3 +53,16 @@ def decimal_to_binary_rec(decimal: int):
     if decimal == 0:
         return 0
     return decimal % 2 + 10 * decimal_to_binary_rec(decimal // 2)
+
+
+# Factorial
+def factorial(num):
+    if num == 0:
+        return 1
+    return num * factorial(num - 1)
+
+# Product of the array
+def productOfArray(arr):
+    if not arr:
+        return 1
+    return arr[0] * productOfArray(arr[1:])
