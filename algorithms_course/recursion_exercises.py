@@ -111,3 +111,26 @@ def reverse_string_rec(string: str):
         return string
     
     return string[-1] + reverse_string_rec(string[:-1])
+
+# Is palidrome
+def isPalidrome(string: str):
+    left = 0
+    right = len(string) - 1
+    
+    while left < right:
+        if not string[left].isalnum():
+            left += 1
+        elif not string[right].isalnum():
+            right -= 1
+        elif string[left] == string[right]:
+            left += 1
+            right -= 1
+        else: return False    
+    return True
+
+def isPalidrome_rec(string: str):
+    if len(string) == 1:
+        return True
+    if string[0] != string[-1]:
+        return False
+    return isPalidrome_rec(string[1:-1])
