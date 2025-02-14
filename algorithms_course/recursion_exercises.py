@@ -239,3 +239,29 @@ def stringifyNumbers_rec(obj):
         if type(value) is dict:
             obj[key] = stringifyNumbers_rec(value)
     return obj
+
+# Collect strings
+def collectStrings_iter(obj):
+    collected_strings = []
+    stack = [obj]
+    
+    while stack:
+        current = stack.pop()
+        for key, value in current.items():
+            if type(value) is str:
+                collected_strings.append(value)
+            if type(value) is dict:
+                stack.append(value)
+                
+    return collected_strings
+
+def collectStrings_rec(obj):
+    collected_strings = []
+    
+    for key, value in obj.items():
+        if type(value) is str:
+            collected_strings.append(value)
+        if type(value) is dict:
+            collected_strings += collectStrings_rec(value)
+                
+    return collected_strings 
