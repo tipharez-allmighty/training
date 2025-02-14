@@ -210,3 +210,32 @@ def nestedEvenSum_rec(obj):
             even_num_sum += nestedEvenSum_rec(value)
         
     return even_num_sum
+
+# Capitalize words
+def capitalizeWords(arr):
+    result = []
+    if len(arr) == 0:
+        return result
+    result.append(arr[0].upper())
+    return result + capitalizeWords(arr[1:])
+
+# Stringify numbers
+def stringifyNumbers_iter(obj):
+    stack = [obj]
+    
+    while stack:
+        current = stack.pop()
+        for key, value in current.items():   
+            if type(value) is int:
+                current[key] = str(value)
+            if type(value) is dict:
+                stack.append(value)
+    return obj
+                
+def stringifyNumbers_rec(obj):
+    for key, value in obj.items():
+        if type(value) is int:
+            obj[key] = str(value)
+        if type(value) is dict:
+            obj[key] = stringifyNumbers_rec(value)
+    return obj
