@@ -134,3 +134,17 @@ def isPalidrome_rec(string: str):
     if string[0] != string[-1]:
         return False
     return isPalidrome_rec(string[1:-1])
+
+# Some recursive
+def isOdd(num):
+    if num%2==0:
+        return False
+    else:
+        return True
+        
+def someRecursive(arr, cb):
+    if len(arr) == 0:
+        return False
+    if cb(arr[-1]):
+        return True
+    return someRecursive(arr[:-1], cb)
