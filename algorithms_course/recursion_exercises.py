@@ -169,3 +169,17 @@ def flatten_rec(arr):
         else:
             flatten_list.append(item)
     return flatten_list
+
+# Capitalize first
+def capitalizeFirst_iter(arr):
+    for i in range(len(arr)):
+        if arr[i].isalnum():
+            arr[i] = arr[i].capitalize()
+    return arr
+
+def capitalizeFirst_rec(arr):
+    result = []
+    if len(arr) == 0:
+        return result
+    result.append(arr[0].capitalize())
+    return result + capitalizeFirst_rec(arr[1:])
