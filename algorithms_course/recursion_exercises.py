@@ -148,3 +148,24 @@ def someRecursive(arr, cb):
     if cb(arr[-1]):
         return True
     return someRecursive(arr[:-1], cb)
+
+# Flatten
+def flatten_iter(arr):
+    stack = arr[::-1]
+    flatten_list = []
+    while stack:
+        item = stack.pop()
+        if isinstance(item, list):
+            stack.extend(item[::-1])
+        else:
+            flatten_list.append(item)
+    return flatten_list
+
+def flatten_rec(arr):
+    flatten_list = []
+    for item in arr:
+        if isinstance(item, list):
+            flatten_list.extend(flatten_rec(item))
+        else:
+            flatten_list.append(item)
+    return flatten_list
