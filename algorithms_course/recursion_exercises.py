@@ -183,3 +183,30 @@ def capitalizeFirst_rec(arr):
         return result
     result.append(arr[0].capitalize())
     return result + capitalizeFirst_rec(arr[1:])
+
+# Nested numbers sum
+def nestedEvenSum_iter(obj):
+    even_num_sum = 0
+    stack = [[key, value] for key, value in obj.items()]
+    while stack:
+        temp = stack.pop()
+        temp_value = temp[1]
+        if isinstance(temp_value, int):
+            if temp_value % 2 == 0:
+                even_num_sum += temp_value
+        elif isinstance(temp_value, dict):
+            stack.extend([[key, value] for key, value in temp_value.items()])
+            
+    return even_num_sum
+
+def nestedEvenSum_rec(obj):
+    even_num_sum = 0
+    
+    for key, value in obj.items():
+        if isinstance(value, int):
+            if value % 2 == 0:
+                even_num_sum += value
+        elif isinstance(value, dict):
+            even_num_sum += nestedEvenSum_rec(value)
+        
+    return even_num_sum
