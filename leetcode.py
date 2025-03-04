@@ -316,7 +316,7 @@ class Solution(object):
         return result
 # Balanced Binary Tree
 # Naive Approach
-# Time Complexity: O(n²), Space Complexity: O(n)
+# Time Complexity: O(n^2), Space Complexity: O(n)
 def getdepth(some_node):
     if some_node is None:
         return 0
@@ -335,3 +335,16 @@ def balanced(some_node):
     if result is False:
         return False
     return balanced(some_node.left) and balanced(some_node.right)
+
+# Optimized
+# Time Complexity: O(n^2), Space Complexity: O(H), where H is the height of the tree (in the worst case, this can be O(n)).
+def isBalanced(some_node):
+    def dfs(some_node):
+        if not some_node:
+            return [True, 0]
+        left, right = dfs(some_node.left), dfs(some_node.right)
+        balanced = left[0] and right[0] and abs(left[1] - right[1]) <= 1
+        height = 1 + max(left[1], right[1])
+        return [balanced, height]
+    
+    return dfs(some_node)[0]
