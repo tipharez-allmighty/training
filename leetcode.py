@@ -314,4 +314,24 @@ class Solution(object):
             count +=1
         
         return result
-        
+# Balanced Binary Tree
+# Naive Approach
+# Time Complexity: O(n²), Space Complexity: O(n)
+def getdepth(some_node):
+    if some_node is None:
+        return 0
+    return 1 + max(
+        getdepth(some_node.left),
+        getdepth(some_node.right)
+    )
+    
+def balanced(some_node):
+    if some_node is None:
+        return True
+    left = getdepth(some_node.left)
+    right = getdepth(some_node.right)
+    
+    result = abs(left - right) <= 1
+    if result is False:
+        return False
+    return balanced(some_node.left) and balanced(some_node.right)
