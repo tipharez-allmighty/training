@@ -24,4 +24,4 @@ class StacksQueue:
         return value_to_return
     
     def peek(self):
-        return self.stack_1[0] if self.stack_1 else None\
+        return self.stack_1[0] if self.stack_1 else None
