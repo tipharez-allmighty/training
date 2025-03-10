@@ -96,7 +96,29 @@ def bucketSort(nums: list[int]) -> None:
     for bucket in buckets:
         insertSort(bucket)
         nums.extend(bucket)
-        
+
+# bucket sort for negative values
+def bucketSort(nums: list[int]):
+    buckets_num = round(math.sqrt(len(nums)))
+    min_value = min(nums)
+    max_value = max(nums)
+    range_val = (max_value - min_value) / buckets_num
+ 
+    buckets = [[] for _ in range(buckets_num)]
+ 
+    for j in nums:
+        if j == max_value:
+            buckets[-1].append(j)
+        else:
+            index = math.floor((j - min_value) / range_val)
+            buckets[index].append(j)
+    
+    sorted_array = []
+    for i in range(buckets_num):
+        insertSort(buckets[i])
+        sorted_array.extend(buckets[i])
+    
+    return sorted_array
 # heap sort
 # Time Complexity: O(n log n), where n is the number of elements.
 def swap(i, j, arr):
