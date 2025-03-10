@@ -81,6 +81,25 @@ def merge_sort(arr):
 
     return merge_inner(arr1, arr2)
 
+# bucket sort
+# The time complexity of bucket sort depends on the sorting algorithm used within each bucket.
+If you use a more efficient sorting algorithm like quicksort, the time complexity of bucket sort can be O(n log n).
+However, if you use simpler algorithms like insertion sort, the time complexity of sorting within each bucket becomes O(n²) in the worst case.
+In the worst case scenario, if the input data is unevenly distributed, bucket sort can degrade to O(n²).
+def bucketSort(nums: list[int]) -> None:
+    buckets_num = int(math.sqrt(len(nums)))
+    max_value = max(nums)
+    find_bucket = lambda x: math.ceil(x * buckets_num / max_value)
+    buckets = [[] for _ in range(buckets_num)]
+    for num in nums:
+        bucket = find_bucket(num)
+        buckets[bucket - 1].append(num)
+    
+    nums.clear()
+    for bucket in buckets:
+        insertSort(bucket)
+        nums.extend(bucket)
+        
 # heap sort
 # Time Complexity: O(n log n), where n is the number of elements.
 def swap(i, j, arr):
