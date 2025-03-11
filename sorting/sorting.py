@@ -175,6 +175,24 @@ def quicksort(arr, left=0, right=None):
         quicksort(arr, left, pivot - 1)
         quicksort(arr, pivot + 1, right)
 
+def quickSort(nums: list[int | float], left: int = 0, right: int | None = None):
+    def findPivot(nums, end_index: int, pivot_index: int = 0):
+        swap_index = pivot_index
+        for i in range(pivot_index + 1, end_index + 1):
+            if nums[i] < nums[pivot_index]:
+                swap_index += 1
+                nums[i], nums[swap_index] = nums[swap_index], nums[i]
+        nums[pivot_index], nums[swap_index] = nums[swap_index], nums[pivot_index]
+        return swap_index
+
+    if right is None:
+        right = len(nums) - 1
+    if left < right:
+        pivot_index = findPivot(nums, right, left)
+        quickSort(nums, left, pivot_index - 1)
+        quickSort(nums, pivot_index + 1, right)
+    return nums
+
 # countsort
 # Time Complexity: O(n + k), where n is the number of elements in the array, and k is the range of the input values.
 # Space Complexity: O(n + k), as additional space is required for the count array and output array.
