@@ -152,6 +152,36 @@ def heapsort(arr):
         swap(0, i, arr)
         buildHeap(arr, i, 0)
 
+def heapSort(nums):
+    def swap(array, i, j):
+        array[i], array[j] = array[j], array[i]
+    
+    def buildHeap(nums, parent, n):
+        largeest = parent
+        left = 2 * parent + 1
+        right = 2 * parent + 2
+        if left < n and nums[largeest] < nums[left]:
+            largeest = left
+        if right < n and nums[largeest] < nums[right]:
+            largeest = right
+        if largeest != parent:
+            swap(nums, parent, largeest)
+            buildHeap(nums, largeest, n)
+        
+    def heapify(nums, n):
+        parent = int(n / 2) - 1
+        for j in range(parent, -1, -1):
+            buildHeap(nums, j, n)
+            
+    n = len(nums)
+    heapify(nums, n)
+    print(nums)
+    for i in range(n - 1, 0, -1):
+        swap(nums, 0, i)
+        buildHeap(nums, 0, i)
+    
+    return nums
+    
 # quicksort
 # Time Complexity: O(n log n) on average, but O(n^2) in the worst case.
 def partition(arr, current_index, pivot):
