@@ -138,23 +138,19 @@ def buildHeap(arr, n, i):
         swap(i, parent, arr)
         buildHeap(arr, n, parent)
 
-def quickSort(nums: list[int | float], left: int = 0, right: int | None = None):
-    def findPivot(nums, end_index: int, pivot_index: int = 0):
-        swap_index = pivot_index
-        for i in range(pivot_index + 1, end_index + 1):
-            if nums[i] < nums[pivot_index]:
-                swap_index += 1
-                nums[i], nums[swap_index] = nums[swap_index], nums[i]
-        nums[pivot_index], nums[swap_index] = nums[swap_index], nums[pivot_index]
-        return swap_index
+def heapify(arr, n):
+    # Time Complexity of heapify: O(n) for building a max heap.
+    i = n // 2 - 1
+    for k in range(i, -1, -1):
+        buildHeap(arr, n, k)
 
-    if right is None:
-        right = len(nums) - 1
-    if left < right:
-        pivot_index = findPivot(nums, right, left)
-        quickSort(nums, left, pivot_index - 1)
-        quickSort(nums, pivot_index + 1, right)
-    return nums
+def heapsort(arr):
+    # Time Complexity of heapsort: O(n log n)
+    n = len(arr)
+    heapify(arr, n)
+    for i in range(n - 1, 0, -1):
+        swap(0, i, arr)
+        buildHeap(arr, i, 0)
 
 def heapSort(nums):
     def swap(array, i, j):
