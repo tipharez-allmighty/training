@@ -138,35 +138,39 @@ def buildHeap(arr, n, i):
         swap(i, parent, arr)
         buildHeap(arr, n, parent)
 
-def heapify(arr, n):
-    # Time Complexity of heapify: O(n) for building a max heap.
-    i = n // 2 - 1
-    for k in range(i, -1, -1):
-        buildHeap(arr, n, k)
+def quickSort(nums: list[int | float], left: int = 0, right: int | None = None):
+    def findPivot(nums, end_index: int, pivot_index: int = 0):
+        swap_index = pivot_index
+        for i in range(pivot_index + 1, end_index + 1):
+            if nums[i] < nums[pivot_index]:
+                swap_index += 1
+                nums[i], nums[swap_index] = nums[swap_index], nums[i]
+        nums[pivot_index], nums[swap_index] = nums[swap_index], nums[pivot_index]
+        return swap_index
 
-def heapsort(arr):
-    # Time Complexity of heapsort: O(n log n)
-    n = len(arr)
-    heapify(arr, n)
-    for i in range(n - 1, 0, -1):
-        swap(0, i, arr)
-        buildHeap(arr, i, 0)
+    if right is None:
+        right = len(nums) - 1
+    if left < right:
+        pivot_index = findPivot(nums, right, left)
+        quickSort(nums, left, pivot_index - 1)
+        quickSort(nums, pivot_index + 1, right)
+    return nums
 
 def heapSort(nums):
     def swap(array, i, j):
         array[i], array[j] = array[j], array[i]
     
     def buildHeap(nums, parent, n):
-        largeest = parent
+        largest = parent
         left = 2 * parent + 1
         right = 2 * parent + 2
-        if left < n and nums[largeest] < nums[left]:
-            largeest = left
-        if right < n and nums[largeest] < nums[right]:
-            largeest = right
-        if largeest != parent:
-            swap(nums, parent, largeest)
-            buildHeap(nums, largeest, n)
+        if left < n and nums[largest] < nums[left]:
+            largest = left
+        if right < n and nums[largest] < nums[right]:
+            largest = right
+        if largest != parent:
+            swap(nums, parent, largest)
+            buildHeap(nums, largest, n)
         
     def heapify(nums, n):
         parent = int(n / 2) - 1
@@ -178,6 +182,7 @@ def heapSort(nums):
     print(nums)
     for i in range(n - 1, 0, -1):
         swap(nums, 0, i)
+        print(nums)
         buildHeap(nums, 0, i)
     
     return nums
