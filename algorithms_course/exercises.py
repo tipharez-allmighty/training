@@ -458,3 +458,11 @@ def getIntersectionNode(self, headA, headB):
         l1 = l1.next if l1 else headB
         l2 = l2.next if l2 else headA
     return l1
+
+# Depth-first search
+visited = []
+def dfs(node):
+    if node not in visited:
+        visited.append(node)
+        for edge in some_graph.adj_list[node]:
+            dfs(edge)
