@@ -466,3 +466,21 @@ def dfs(node):
         visited.append(node)
         for edge in some_graph.adj_list[node]:
             dfs(edge)
+
+# Route Between Nodes 
+# Time Complexity: O(V + E)
+# Space Complexity: O(V + E)
+def checkRoute(self, startNode, endNode):
+    visited = set()
+    queue = deque()
+    queue.append(startNode)
+    while queue:
+        current_vertex = queue.popleft()
+        if current_vertex not in visited:
+            visited.add(current_vertex)
+        if current_vertex == endNode:
+            return True
+        for edge in self.gdict.get(current_vertex, []):
+            if edge not in visited:
+                queue.append(edge)
+    return False
