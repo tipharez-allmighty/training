@@ -579,3 +579,55 @@ def isValidBST_rec(root):
             return False
         return dfs(node.left, low, node.val) and dfs(node.right, node.val, high)
     return dfs(root)
+
+# In order successor
+# Time Complexity: O(n)
+# Space Complexity: O(n)
+def inOrderSuccessor(root, n):
+    stack = []
+    current = root
+    succesor = False
+    while stack or current:
+        while current:
+            stack.append(current)
+            current = current.left
+
+        current = stack.pop()
+        if succesor:
+            return current.data
+        if current.data == n:
+            succesor = True
+        current = current.right
+
+# In order successor
+# Time Complexity: O(n)
+# Space Complexity: O(n)
+def inOrderSuccessor_rec(root, n):
+    ordered = []
+    def inOrderTraversal(root):
+        if root is None:
+            return
+        inOrderTraversal(root.left)
+        ordered.append(root)
+        inOrderTraversal(root.right)
+    inOrderTraversal(root)
+    
+    ordered = [item.data for item in ordered]
+    if n in ordered:
+        if ordered.index(n) == len(ordered) - 1:
+            return None
+        return ordered[ordered.index(n)+1]
+
+# In order successor
+# Time Complexity: O(n) if tree is completely skewed, O(logn) on average
+# Space Complexity: O(1)
+def inOrderSuccesorOptimal(root, n):
+    succesor = None
+    current = root
+    while current:
+        if n >= current.data:
+            current = current.right
+        else:
+            succesor = current.data
+            current = current.left
+    return succesor
