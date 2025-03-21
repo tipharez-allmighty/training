@@ -484,3 +484,71 @@ def checkRoute(self, startNode, endNode):
             if edge not in visited:
                 queue.append(edge)
     return False
+
+# Minimal tree
+# Time Complexity: O(n log n)
+# Space Complexity: O(n)
+def minimalTree(sortedArray):
+    middle = len(sortedArray) // 2
+    node = BSTNode(data=sortedArray[middle])
+    left_array = sortedArray[:middle]    
+    right_array = sortedArray[middle + 1:]
+    stack = [(node, left_array, right_array)]
+    
+    while stack:
+        current_node, left_array, right_array = stack.pop()
+        
+        if left_array:
+            left_middle = len(left_array) // 2
+            current_node.left = BSTNode(data=left_array[left_middle])
+            stack.append(
+                (current_node.left, left_array[:left_middle], 
+                 left_array[middle + 1:])
+                )
+        if right_array:
+            right_middle = len(right_array) // 2
+            current_node.right = BSTNode(data=right_array[right_middle])
+            stack.append(
+                (current_node.right, right_array[:right_middle], 
+                 right_array[right_middle + 1:])
+                ) 
+        
+    return node
+
+def minimalTree_rec(sortedArray):
+    if len(sortedArray) == 0:
+        return None
+    if len(sortedArray) == 1:
+        return sortedArray[0]
+    middle = len(sortedArray) // 2
+    left = minimalTree_rec(sortedArray[:middle])
+    right =  minimalTree_rec(sortedArray[middle + 1:])
+    node = BSTNode(
+        data=sortedArray[middle],
+        left=left, right=right
+    )
+    return node
+
+# List of Depths
+# Time Complexity: O(n)
+# Space Complexity: O(n)
+def depth(tree):
+    queue = deque()
+    queue.append(tree)
+    d = 1
+    result = {}
+    while queue:
+        level_size = len(queue)
+        for _ in range(level_size):
+            current_node = queue.popleft()
+            if d not in result:
+                result[d] = LinkedList(current_node.val)
+            else:
+                result[d].add(current_node.val)
+            if current_node.left:
+                queue.append(current_node.left)
+            if current_node.right:
+                queue.append(current_node.right)
+        d += 1
+    print({k: result[k] for k in sorted(result.keys(), reverse=True)})
+    return result
