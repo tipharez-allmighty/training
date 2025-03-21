@@ -552,3 +552,30 @@ def depth(tree):
         d += 1
     print({k: result[k] for k in sorted(result.keys(), reverse=True)})
     return result
+    
+# Valid BST
+# Time Complexity: O(n)
+# Space Complexity: O(n)
+def isValidBST(root):
+    if not root:
+        return True
+    queue = deque()
+    queue.append((root, float('-inf'), float('inf')))
+    while queue:
+        current_node, low, high = queue.popleft()
+        if not (low < current_node.val < high):
+            return False
+        if current_node.left:
+            queue.append((current_node.left, low, current_node.val))
+        if current_node.right:
+            queue.append((current_node.right, current_node.val, high))
+    return True
+ 
+def isValidBST_rec(root):
+    def dfs(node, low=float('-inf'), high=float('inf')):
+        if not node:
+            return True
+        if not (low < node.val < high):
+            return False
+        return dfs(node.left, low, node.val) and dfs(node.right, node.val, high)
+    return dfs(root)
