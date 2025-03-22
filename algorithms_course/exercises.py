@@ -647,3 +647,29 @@ class Solution:
         if left and right:
             return root        
         return left or right   
+
+# Fractional Knapsack
+# Time Complexity: O(nlogn)
+# Space Complexity: O(h)
+class Item:
+    def __init__(self, weight, value):
+        self.weight = weight
+        self.value = value
+        self.ratio = value / weight
+    
+    def __repr__(self):
+        return f'weight={self.weight}, value={self.value}, ratio={self.ratio}'
+
+def fractKnap(items: list[Item], max_weight: int) -> int:
+    sorted_items = sorted(items, key=lambda x: x.ratio, reverse=True)
+    total_value = 0
+    space_left = max_weight
+    for item in sorted_items:
+        reminder = space_left - item.weight
+        if reminder < 0:
+            total_value += space_left * item.ratio
+            space_left = 0
+            break
+        total_value += item.weight * item.ratio
+        space_left = reminder
+    return total_value
