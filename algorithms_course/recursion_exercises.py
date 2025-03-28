@@ -265,3 +265,63 @@ def collectStrings_rec(obj):
             collected_strings += collectStrings_rec(value)
                 
     return collected_strings 
+# Fibonacci
+def fib(num: int):
+    if num == 0: return 0
+    if num == 1: return 1
+    return fib(num - 2) + fib(num - 1)
+    ...
+
+# Number of ways to express number
+def numFactor(num: int):
+    if num in (0, 1, 2):
+        return 1
+    elif num == 3:
+        return 2
+    else:
+        return numFactor(num - 4) + numFactor(num - 3) + numFactor(num - 1)
+
+# House Robber
+def houseRobberMax(houses: list, current_house: int = 0):
+    if current_house > len(houses) - 1:
+        return 0
+    return max(
+        houses[current_house] + houseRobberMax(houses, current_house + 2),
+        houseRobberMax(houses, current_house + 1)
+    )
+
+# Levenstein distance
+def levenstein(s1, s2, index1: int =0, index2: int = 0):
+    if index1 == len(s1):
+        return len(s2) - index2
+    if index2 == len(s2):
+        return len(s1) - index1
+    if s1[index1] == s2[index2]:
+        return levenstein(s1, s2, index1 + 1, index2 + 1)
+    else:
+        deleteOp = 1 + levenstein(s1, s2, index1, index2 + 1)
+        insertOp = 1 + levenstein(s1, s2, index1 + 1, index2)
+        replaceOp = 1 + levenstein(s1, s2, index1 + 1, index2 + 1)
+        return min(deleteOp, insertOp, replaceOp)
+        
+# Longest common sequence
+def findLCS(s1, s2, index1, index2):
+    if index1 == len(s1) or index2 == len(s2):
+        return 0
+    if s1[index1] == s2[index2]:
+        return 1 + findLCS(s1, s2, index1 + 1, index2 + 1)
+    else:
+        op1 = findLCS(s1, s2, index1, index2 + 1)
+        op2 = findLCS(s1, s2, index1 + 1, index2)
+        return max(op1, op2)
+
+# Minimum cose to reach the last cell
+def minimumCost(two_d_array, row, col):
+    if row == -1 or col == -1:
+        return float('inf')
+    elif row == 0 and col == 0:
+        return two_d_array[0][0]
+    else:
+        op1 = minimumCost(two_d_array, row - 1, col)
+        op2 = minimumCost(two_d_array, row, col - 1)
+        return two_d_array[row][col] + min(op1, op2)
