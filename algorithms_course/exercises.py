@@ -673,3 +673,21 @@ def fractKnap(items: list[Item], max_weight: int) -> int:
         total_value += item.weight * item.ratio
         space_left = reminder
     return total_value
+
+# Coin change
+def coinChange(coins, total_number):
+    sorted_coins = sorted(coins,reverse=True)
+    number_of_coins = 0
+    index = 0
+    reminder = total_number
+    while reminder > 0:
+        substraction = reminder - sorted_coins[index]
+        if substraction == 0:
+            number_of_coins +=1
+            return number_of_coins
+        if substraction < 0:
+            index += 1
+        else:
+            number_of_coins +=1
+            reminder = substraction
+    return number_of_coins
