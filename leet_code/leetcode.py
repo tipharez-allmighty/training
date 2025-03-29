@@ -197,5 +197,31 @@ def isBalanced(some_node):
         balanced = left[0] and right[0] and abs(left[1] - right[1]) <= 1
         height = 1 + max(left[1], right[1])
         return [balanced, height]
-    
+
+# Is subsequence
+# Time Complexity: O(n), Space Complexity: O(1)
+class Solution:
+    def isSubsequence(self, s: str, t: str) -> bool:
+        p1 = 0
+        p2 = 0
+        while p1 != len(s):
+            if p2 == len(t):
+                return False
+            if s[p1] != t[p2]:
+                p2 += 1
+            else:
+                p1 += 1
+                p2 += 1
+        return True
     return dfs(some_node)[0]
+
+# Optimized
+class Solution:
+    def isSubsequence(self, s: str, t: str) -> bool:
+        p1 = 0
+        p2 = 0
+        while p1 < len(s) and p2 < len(t):
+            if s[p1] == t[p2]:
+                p1 += 1
+            p2 += 1
+        return p1 == len(s)
