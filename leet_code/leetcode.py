@@ -225,3 +225,35 @@ class Solution:
                 p1 += 1
             p2 += 1
         return p1 == len(s)
+
+# Unique Number of Occurrences
+# Time Complexity:  O(n + m²)
+# Space Complexity: O(m)
+class Solution:
+    def uniqueOccurrences(self, arr: List[int]) -> bool:
+        occurrences = dict().fromkeys(arr, 0)
+        for value in arr:
+            if value in occurrences:
+                occurrences[value] += 1
+        values = list(occurrences.values())
+        value_to_compare = values[0]
+        for i in range(1, len(values)):
+            if value_to_compare in values[i:]:
+                return False
+            value_to_compare = values[i]
+        return True
+        
+# Time Complexity:  O(n)
+# Space Complexity: O(m)
+class Solution:
+    def uniqueOccurrences(self, arr: List[int]) -> bool:
+        set_of_values = set()
+        occurrences = dict().fromkeys(arr, 0)
+        for value in arr:
+            if value in occurrences:
+                occurrences[value] += 1
+        
+        for value in occurrences.values():
+            set_of_values.add(value)
+        
+        return len(occurrences) == len(set_of_values)
