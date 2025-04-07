@@ -257,3 +257,24 @@ class Solution:
             set_of_values.add(value)
         
         return len(occurrences) == len(set_of_values)
+
+# Time Complexity:  O(n + m)
+# Space Complexity: O(n + m)
+class Solution:
+    def findDifference(self, nums1: List[int], nums2: List[int]) -> List[List[int]]:
+        result = []
+        dict1 = dict().fromkeys(nums1, 0)
+        dict2 = dict().fromkeys(nums2, 0)
+        first_list = [key for key in dict1 if key not in dict2]
+        second_list = [key for key in dict2 if key not in dict1]
+        result.append(first_list)
+        result.append(second_list)
+        return result
+
+# Time Complexity:  O(n + m)
+# Space Complexity: O(m + m)
+class Solution:
+    def findDifference(self, nums1: List[int], nums2: List[int]) -> List[List[int]]
+        set1 = set(nums1)
+        set2 = set(nums2)
+        return [list(set1 - set2), list(set2 - set1)]
