@@ -278,3 +278,48 @@ class Solution:
         set1 = set(nums1)
         set2 = set(nums2)
         return [list(set1 - set2), list(set2 - set1)]
+
+# Time Complexity:  O(n)
+# Space Complexity: O(m + n)
+class Solution(object):
+    def isAnagram(self, s, t):
+        """
+        :type s: str
+        :type t: str
+        :rtype: bool
+        """
+        if len(s) != len(t):
+            return False
+        s_dict = dict.fromkeys(list(s), 0)
+        for char in s:
+            if char in s_dict:
+                s_dict[char] += 1
+        for char in t:
+            if char in s_dict:
+                s_dict[char] -= 1
+        for value in s_dict.values():
+            if value != 0:
+                return False
+        return True
+
+# Time Complexity:  O(n)
+# Space Complexity: O(m + n)
+class Solution(object):
+    def isAnagram(self, s, t):
+        """
+        :type s: str
+        :type t: str
+        :rtype: bool
+        """
+        if len(s) != len(t):
+            return False
+        
+        s_dict, t_dict = {}, {}
+        
+        for i in range(len(s)):
+            s_dict[s[i]] = 1 + s_dict.get(s[i], 0)
+            t_dict[t[i]] = 1 + t_dict.get(t[i], 0)
+        for key in s_dict:
+            if s_dict[key] != t_dict.get(key, 0):
+                return False
+        return True
