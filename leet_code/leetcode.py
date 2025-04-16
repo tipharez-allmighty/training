@@ -323,3 +323,26 @@ class Solution(object):
             if s_dict[key] != t_dict.get(key, 0):
                 return False
         return True
+        
+# Time Complexity:  O(n)
+# Space Complexity: O(n)
+class Solution:
+    def isValid(self, s: str) -> bool:
+        ...
+        parentheses = {
+           '(':')', '{':'}', '[':']'
+        }
+        stack = []
+        for char in s:
+            if stack:
+                previous = parentheses.get(stack[-1])
+                if not previous:
+                    return False
+                elif char == previous:
+                    stack.pop()
+                else:
+                    stack.append(char)
+            else:
+                stack.append(char)
+
+        return False if stack else True
