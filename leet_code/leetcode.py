@@ -346,3 +346,29 @@ class Solution:
                 stack.append(char)
 
         return False if stack else True
+
+# Time Complexity:  O(n)
+# Space Complexity: O(1)
+class Solution:
+    def maxArea(self, height: List[int]) -> int:
+        def waterAmount(index1: int, index2: int):
+            min_height = (
+                height[index1] if height[index1] < height[index2] else height[index2]
+            )
+            return min_height * (index2 - index1)
+
+        max_water = 0
+        left = 0
+        right = len(height) - 1
+
+        while left < right:
+            current_amount = waterAmount(
+                index1=left,
+                index2=right,
+            )
+            max_water = current_amount if current_amount > max_water else max_water
+            if height[left] < height[right]:
+                left += 1
+            else:
+                right -= 1
+        return max_water
