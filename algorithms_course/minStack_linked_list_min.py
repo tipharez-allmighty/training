@@ -10,17 +10,17 @@ class Node:
 class MinStack:
     def __init__(self):
         self.stack = None
-        self.min_value = None
+        self.min_values = None
 
     def __repr__(self):
-        return f"(Min_value={self.min_value.value if self.min_value else None}, stack={self.stack})"
+        return f"(Min_value={self.min_values.value if self.min_values else None}, stack={self.stack})"
 
     def isEmpty(self):
         return self.stack == None
 
     def push(self, value):
-        if not self.min_value or value <= self.min_value.value:
-            self.min_value = Node(value=value, next=self.min_value)
+        if not self.min_values or value <= self.min_values.value:
+            self.min_values = Node(value=value, next=self.min_values)
         value_to_push = Node(value=value)
         if self.isEmpty():
             self.stack = value_to_push
@@ -32,8 +32,8 @@ class MinStack:
         if self.isEmpty():
             raise IndexError("Stack is Empty")
         value_to_return = self.stack.value
-        if value_to_return == self.min_value.value:
-            self.min_value = self.min_value.next
+        if value_to_return == self.min_values.value:
+            self.min_values = self.min_values.next
         if self.stack.next == None:
             self.stack = None
         else:
@@ -48,4 +48,4 @@ class MinStack:
     def getMin(self):
         if self.isEmpty():
             raise IndexError("Stack is Empty")
-        return self.min_value.value
+        return self.min_values.value
