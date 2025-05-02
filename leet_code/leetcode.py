@@ -198,6 +198,7 @@ def isBalanced(some_node):
         height = 1 + max(left[1], right[1])
         return [balanced, height]
     return dfs(some_node)[0]
+
 # Is subsequence
 # Time Complexity: O(n), Space Complexity: O(1)
 class Solution:
@@ -258,6 +259,7 @@ class Solution:
         
         return len(occurrences) == len(set_of_values)
 
+# Find difference
 # Time Complexity:  O(n + m)
 # Space Complexity: O(n + m)
 class Solution:
@@ -279,6 +281,7 @@ class Solution:
         set2 = set(nums2)
         return [list(set1 - set2), list(set2 - set1)]
 
+# Is Anagram
 # Time Complexity:  O(n)
 # Space Complexity: O(m + n)
 class Solution(object):
@@ -301,7 +304,7 @@ class Solution(object):
             if value != 0:
                 return False
         return True
-
+        
 # Time Complexity:  O(n)
 # Space Complexity: O(m + n)
 class Solution(object):
@@ -324,18 +327,19 @@ class Solution(object):
                 return False
         return True
         
+# Valid parenthesis         
 # Time Complexity:  O(n)
 # Space Complexity: O(n)
 class Solution:
     def isValid(self, s: str) -> bool:
         ...
-        parentheses = {
+        parenthesis = {
            '(':')', '{':'}', '[':']'
         }
         stack = []
         for char in s:
             if stack:
-                previous = parentheses.get(stack[-1])
+                previous = parenthesis.get(stack[-1])
                 if not previous:
                     return False
                 elif char == previous:
@@ -347,6 +351,7 @@ class Solution:
 
         return False if stack else True
 
+# Container With Most Water
 # Time Complexity:  O(n)
 # Space Complexity: O(1)
 class Solution:
@@ -372,3 +377,19 @@ class Solution:
             else:
                 right -= 1
         return max_water
+
+# Reverse Linked list
+# Time Complexity:  O(n)
+# Space Complexity: O(1)
+class Solution:
+    def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if not head or not head.next:
+            return head
+        current = head
+        previous = None
+        while current:
+            temp_node = current.next
+            current.next = previous
+            previous = current
+            current = temp_node
+        return previous
