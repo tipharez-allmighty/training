@@ -145,3 +145,19 @@ var mergeAlternately = function(word1, word2) {
     }
     return result;
 };
+
+// reverse linked list
+var reverseList = function(head) {
+    if (head === null || head.next === null) {
+        return head
+    };
+    let current = head
+    let previous = null
+    while (current) {
+        let temp_node = current.next
+        current.next = previous
+        previous = current
+        current = temp_node
+    };
+    return previous;
+};
