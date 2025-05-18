@@ -393,3 +393,25 @@ class Solution:
             previous = current
             current = temp_node
         return previous
+
+# Merge two sorted Linked Lists
+# Time Complexity: O(n + m)
+# Space Complexity: O(1)
+class Solution:
+    def mergeTwoLists(self, list1: Optional[ListNode],
+                      list2: Optional[ListNode]) -> Optional[ListNode]:
+        dummy = ListNode()
+        tail = dummy
+        while list1 and list2:
+            if list1.val < list2.val:
+                tail.next = list1
+                list1 = list1.next
+            else:
+                tail.next = list2
+                list2 = list2.next
+            tail = tail.next
+        last_node = list1 if list1 else list2
+        if last_node:
+            tail.next = last_node
+        return dummy.next
+
