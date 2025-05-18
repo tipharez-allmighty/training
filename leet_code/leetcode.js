@@ -161,3 +161,24 @@ var reverseList = function(head) {
     };
     return previous;
 };
+
+// merge two sorted linked lists
+var mergeTwoLists = function(list1, list2) {
+    const dummy = new ListNode()
+    let tail = dummy
+    while (list1 && list2) {
+        if (list1.val < list2.val) {
+            tail.next = list1
+            list1 = list1.next
+        } else {
+            tail.next = list2
+            list2 = list2.next
+        }
+        tail = tail.next
+    }
+    const last_node = list1 || list2
+    if (last_node) {
+        tail.next = last_node
+    }
+    return dummy.next;
+};
