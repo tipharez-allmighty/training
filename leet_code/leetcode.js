@@ -1,3 +1,20 @@
+// Best Time to Buy and Sell Stocks
+var maxProfit = function(prices) {
+    let minPrice = Infinity;
+    let maxProfit = 0;
+
+    for (let price of prices) {
+        if (price < minPrice) {
+            minPrice = price;
+        }
+        else {
+            maxProfit = Math.max(maxProfit,
+                price - minPrice
+            )
+        }
+    }
+    return maxProfit
+};
 // Greatest Common Divisor of Strings
 var gcdOfStrings = function(str1, str2) {
     for (let i=Math.min(str1.length, str2.length); i>0; i--) {
