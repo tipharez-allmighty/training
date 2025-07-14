@@ -1,3 +1,15 @@
+# Best Time to Buy and Sell Stock
+# Time Complexity: O(n)
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        min_price = float('inf')
+        max_profit = 0
+        for price in prices:
+            if price < min_price:
+                min_price = price
+            else:
+                max_profit = max(max_profit, price - min_price)
+        return max_profit
 # Greatest Common Divisor of Strings
 class Solution:
     def gcdOfStrings(self, str1: str, str2: str) -> str: 
