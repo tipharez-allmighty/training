@@ -1,3 +1,15 @@
+// Invert Binary Tree
+var invertTree = function(root) {
+  if (!root) {
+    return null;
+  } else {
+    [root.right, root.left] = [root.left, root.right]
+    invertTree(root.left)
+    invertTree(root.right)
+    return root;
+  }  
+};
+
 // Has cycle
 var hasCycle = function(head) {
     let slow = head;
