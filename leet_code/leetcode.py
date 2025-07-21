@@ -1,3 +1,20 @@
+# Kth Largest Element in a Stream
+# Time Complexity: O(logk) because we dont store all elements in the array, we store only k amount
+# Space Complexity: O(k)
+class KthLargest:
+    def __init__(self, k: int, nums: List[int]):
+        self.k: int = k
+        self.minHeap: List[int] = nums
+        heapq.heapify(self.minHeap)
+        while len(self.minHeap) > k:
+            heapq.heappop(self.minHeap)
+
+    def add(self, val: int) -> int:
+        heapq.heappush(self.minHeap, val)
+        if len(self.minHeap) > self.k:
+            heapq.heappop(self.minHeap)
+        return self.minHeap[0]
+        
 # Invert Binary Tree
 # Time Complexity: O(n)
 # Space Complexity: O(1)
