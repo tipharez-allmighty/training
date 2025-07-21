@@ -1,6 +1,17 @@
+# Invert Binary Tree
+# Time Complexity: O(n)
+# Space Complexity: O(1)
+class Solution:
+    def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+        if root:
+            root.left, root.right = root.right, root.left
+            self.invertTree(root.right)
+            self.invertTree(root.left)
+        return root
 # Has Cycle
 # Time Complexity: O(n)
 # Space Complexity: O(1)
+
 class Solution:
     def hasCycle(self, head: Optional[ListNode]) -> bool:
         slow = head
