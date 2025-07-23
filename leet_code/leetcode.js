@@ -8,7 +8,6 @@ var reverseString = function(s) {
         p1 += 1;
         p2 -= 1;
     }
-    return s.join();
 }
 
 
