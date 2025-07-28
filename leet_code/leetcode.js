@@ -1,3 +1,31 @@
+// Valid Parentheses 
+var isValid = function(s) {
+    let obj = {
+            '(':')', '{':'}', '[':']'
+            };
+    let stack = []
+    
+    for (const char of s) {
+        if (stack.length === 0) {
+            stack.push(char)
+        } else {
+            previous = obj[stack[stack.length - 1]] ?? null
+            if (!previous) {
+                return false;
+            }
+            else if (char === previous) {
+                stack.pop();
+            } else {
+                stack.push(char)
+            }
+        }
+    }
+    if (stack.length !== 0) {
+        return false;
+    } else {
+        return true;
+    }   
+};
 // Reverse String
 var reverseString = function(s) {
     let p1 = 0;
