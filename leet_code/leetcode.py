@@ -1,3 +1,21 @@
+# 594. Longest Harmonious Subsequence
+# Time Complexity: O(n)
+# Space Complexity: O(n)
+class Solution:
+    def findLHS(self, nums: List[int]) -> int:
+        freq_dict = dict().fromkeys(nums, 0)
+        max_length = 0
+        for num in nums:
+            if num in freq_dict:
+                freq_dict[num] += 1
+        
+        for number, freq in freq_dict.items():
+            if number + 1 in freq_dict:
+                current_len = freq + freq_dict[number + 1]
+                max_length = max(max_length, current_len)
+            
+        return max_length
+        
 # 643. Maximum Average Subarray I
 # Time Complexity: O(n)
 # Space Complexity: O(1)
