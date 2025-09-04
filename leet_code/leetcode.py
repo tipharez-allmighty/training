@@ -1,3 +1,19 @@
+# 643. Maximum Average Subarray I
+# Time Complexity: O(n)
+# Space Complexity: O(1)
+class Solution:
+    def findMaxAverage(self, nums: List[int], k: int) -> float:
+        cur_sum = sum(nums[0:k])
+        cur_max = cur_sum / k
+
+        for i in range(k, len(nums)):
+            cur_sum += nums[i]
+            cur_sum -= nums[i - k]
+            cur_average = cur_sum / k
+            cur_max = max(cur_average, cur_max)
+        
+        return cur_max
+        
 # 219. Contains Duplicate II
 # Time Complexity: O(n)
 # Space Complexity: O(k)
