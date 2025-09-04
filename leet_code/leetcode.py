@@ -1,3 +1,23 @@
+# 219. Contains Duplicate II
+# Time Complexity: O(n)
+# Space Complexity: O(k)
+class Solution:
+    def containsNearbyDuplicate(self, nums: List[int], k: int) -> bool:
+        window = set()
+        j = 0
+        i = 0
+        while j < len(nums):
+            if abs(i - j) <= k:
+                if not nums[j] in window:
+                    window.add(nums[j])
+                    j += 1
+                else:
+                    return True
+            else:
+                window.remove(nums[i])
+                i += 1
+        return False
+
 # Last Stone Weight
 # Time Complexity: O(nlogn)
 # Space Complexity: O(n)
