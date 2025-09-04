@@ -1,3 +1,27 @@
+# 637. Average of Levels in Binary Tree
+# Time Complexity: O(n)
+# Space Complexity: O(w)
+# Optimal solution
+class Solution:
+    def averageOfLevels(self, root: Optional[TreeNode]) -> List[float]:
+            queue = deque()
+            queue.append(root)
+            result = []
+            while queue:
+                level_len = len(queue)
+                level_sum = 0
+                for _ in range(level_len):
+                    node = queue.popleft()
+                    level_sum += node.val
+                    if node.left:
+                        queue.append(node.left)
+                    if node.right:
+                        queue.append(node.right)
+                
+                result.append(level_sum / level_len)
+            
+            return result
+            
 # 88. Merge Sorted Array
 # Time Complexity: O(n)
 # Space Complexity: O(1)
