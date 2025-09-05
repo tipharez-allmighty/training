@@ -8,7 +8,6 @@ def retry(times: int = 3):
                     if attempt == times - 1:
                         raise Exception(f"Failed after {times} attempts.") 
         return wrapper
-    
     return decorator
 
 
