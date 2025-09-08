@@ -28,4 +28,4 @@ def multiply(matrix_1: np.ndarray, matrix_2: np.ndarray) -> np.ndarray:
 matrix_1 = create_matrix(n, m)
 matrix_2 = create_matrix(m, n)
 
-print((multiply(matrix_1, matrix_2)))
+print(multiply(matrix_1, matrix_2))
