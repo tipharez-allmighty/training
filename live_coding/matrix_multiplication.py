@@ -17,6 +17,9 @@ def multiply_numpy(matrix_1: np.ndarray, matrix_2: np.ndarray) -> np.ndarray:
 
 
 def multiply(matrix_1: np.ndarray, matrix_2: np.ndarray) -> np.ndarray:
+    if matrix_1.shape[1] != matrix_2.shape[0]:
+        raise ValueError("Matrices of given shapes cant be multiplied")
+    
     result = np.zeros(shape=(matrix_1.shape[0], matrix_2.shape[1]))
     for i in range(matrix_1.shape[0]):
         for j in range(matrix_2.shape[1]):
