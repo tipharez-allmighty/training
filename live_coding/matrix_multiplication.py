@@ -2,13 +2,13 @@ import random
 
 import numpy as np
 
+random.seed(37)
 n = 3
 m = 2
 
 
 def create_matrix(n: int = 3, m: int = 2) -> np.ndarray:
     return np.array([[random.randint(0, 1) for _ in range(m)] for _ in range(n)])
-
 
 def multiply_numpy(matrix_1: np.ndarray, matrix_2: np.ndarray) -> np.ndarray:
     # return np.matmul(matrix_1, matrix_2)
@@ -27,8 +27,18 @@ def multiply(matrix_1: np.ndarray, matrix_2: np.ndarray) -> np.ndarray:
                 result[i][j] += matrix_1[i][k]*matrix_2[k][j]
     return result
 
-
 matrix_1 = create_matrix(n, m)
 matrix_2 = create_matrix(m, n)
 
-print(multiply(matrix_1, matrix_2))
+def test_matrix_multiply():
+    assert multiply(matrix_1, matrix_2).all() == multiply_numpy(matrix_1, matrix_2).all()
+    matrix_fail_1 = create_matrix(n, m)
+    matrix_fail_2 = create_matrix(m + 1, n)
+    try:
+        multiply(matrix_fail_1, matrix_fail_2)
+    except ValueError:
+        pass
+    else:
+        raise AssertionError
+
+test_matrix_multiply()
