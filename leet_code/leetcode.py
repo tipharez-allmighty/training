@@ -1,3 +1,31 @@
+# 9. Palindrome Number
+# Time Complexity: O(n)
+# Space Complexity: O(1)
+class Solution:
+    def isPalindrome(self, x: int) -> bool:
+        if x < 0:
+            return False
+        div = 1
+        while x > 10 * div:
+            div *= 10
+        
+
+        while x:
+            left = x // div
+            right = x % 10
+        
+            if left != right:
+                return False
+            x = (x % div) // 10
+            div = div / 100
+        return True
+        
+# Time Complexity: O(n)
+# Space Complexity: O(n)
+class Solution:
+    def isPalindrome(self, x: int) -> bool:
+        return str(x) == str(x)[::-1]
+
 # 637. Average of Levels in Binary Tree
 # Time Complexity: O(n)
 # Space Complexity: O(w)
