@@ -1,3 +1,23 @@
+# 28. Find the Index of the First Occurrence in a String
+# Time Complexity: O(n x m)
+# Space Complexity: O(1)
+class Solution:
+    def strStr(self, haystack: str, needle: str) -> int:
+        i = 0
+        p1 = 0
+        p2 = 0
+        while i + len(needle) <= len(haystack):
+            if haystack[p1] == needle[p2]:
+                p1 += 1
+                p2 += 1
+            else:
+                i += 1
+                p1 = i
+                p2 = 0
+            if p2 == len(needle):
+                return p1 - p2
+        return -1
+
 # 9. Palindrome Number
 # Time Complexity: O(n)
 # Space Complexity: O(1)
