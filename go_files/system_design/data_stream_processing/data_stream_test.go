@@ -15,3 +15,17 @@ func TestKthLargest(t *testing.T) {
 	val = kthLargest.Add(5)
 	fmt.Println(kthLargest.nums, val)
 }
+
+func TestTrie(t *testing.T) {
+	trie := NewTrie()
+	trie.InsertReverse("something")
+	fmt.Printf("%#v", trie)
+}
+
+func TestString(t *testing.T) {
+	streamChecker := NewStreamChecker([]string{"abc", "xyz"})
+	fmt.Printf("%#v", streamChecker)
+	for _, val := range []byte{'a', 'b', 'c'} {
+		fmt.Println(streamChecker.Query(val))
+	}
+}
